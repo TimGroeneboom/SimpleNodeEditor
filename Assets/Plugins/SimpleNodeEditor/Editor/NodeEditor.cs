@@ -116,6 +116,38 @@ namespace SimpleNodeEditor
             }
         }
 
+        void CreateNodeMenu()
+        {
+            GenericMenu genericMenu = new GenericMenu();
+
+            Vector2 mousePos = Event.current.mousePosition;
+
+            // this is making the assumption that all assemblies we need are already loaded.
+            foreach (System.Reflection.Assembly assembly in System.AppDomain.CurrentDomain.GetAssemblies())
+            {
+                foreach (System.Type type in assembly.GetTypes())
+                {
+                    var attribs = type.GetCustomAttributes(typeof(NodeMenuItem), false);
+                    if (attribs.Length > 0)
+                    {
+                        for (int i = 0; i < attribs.Length; i++)
+                        {
+                            string name = ((NodeMenuItem)attribs[i]).Name;
+                            System.Type nodeType = ((NodeMenuItem)attribs[i]).Type;
+
+                            genericMenu.AddItem(new GUIContent(name), false, () =>
+                            {
+                                CreateNode(mousePos, nodeType);
+                            });
+                        }
+                    }
+
+                }
+            }
+
+            genericMenu.ShowAsContext();
+        }
+
         void OnGUI()
         {
             BeginWindows();
@@ -143,41 +175,39 @@ namespace SimpleNodeEditor
 
                 if (!handled && Event.current.button == 1)
                 {
-                    GenericMenu genericMenu = new GenericMenu();
-
-                    Vector2 mousePos = Event.current.mousePosition;
-
-                    // this is making the assumption that all assemblies we need are already loaded.
-                    foreach (System.Reflection.Assembly assembly in System.AppDomain.CurrentDomain.GetAssemblies())
-                    {
-                        foreach (System.Type type in assembly.GetTypes())
-                        {
-                            var attribs = type.GetCustomAttributes(typeof(NodeMenuItem), false);
-                            if (attribs.Length > 0)
-                            {
-                                for(int i = 0 ; i < attribs.Length; i++)
-                                {
-                                    string name = ((NodeMenuItem)attribs[i]).Name;
-                                    System.Type nodeType = ((NodeMenuItem)attribs[i]).Type;
-
-                                    genericMenu.AddItem(new GUIContent(name), false, ()=>
-                                    {
-                                        CreateNode(mousePos, nodeType);
-                                    });
-                                }
-                            }
-                               
-                        }
-                    }
-
-                    genericMenu.ShowAsContext();
+                    CreateNodeMenu();
+                }else if(!handled && Event.current.button == 0)
+                {
+                    m_startMousePos = Event.current.mousePosition;
                 }
             }
             else if (Event.current.type == EventType.MouseDrag)
             {
+                bool handled = false;
                 for (int i = 0; i < m_nodes.Count; i++)
                 {
-                    m_nodes[i].MouseDrag(Event.current.mousePosition);
+                    if( m_nodes[i].MouseDrag(Event.current.mousePosition) )
+                    {
+                        handled = true;
+                        break;
+                    }
+                }
+
+                if(!handled)
+                {
+                    if( Event.current.shift )
+                    {
+                        Vector2 offset = Event.current.mousePosition - m_startMousePos;
+                        for (int i = 0; i < m_nodes.Count; i++)
+                        {
+                            m_nodes[i].Position += offset;
+                        }
+
+                        Repaint();
+
+                        m_startMousePos = Event.current.mousePosition;
+                        handled = true;
+                    }
                 }
             }
             else if (Event.current.type == EventType.MouseUp)
