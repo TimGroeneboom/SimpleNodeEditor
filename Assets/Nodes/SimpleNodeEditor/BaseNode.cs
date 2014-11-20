@@ -107,6 +107,7 @@ namespace SimpleNodeEditor
         public abstract void Construct();
         protected abstract void Inited();
 
+#if UNITY_EDITOR
         public void Draw()
         {
             m_rect = GUI.Window(Id, m_rect, WindowCallback, gameObject.name);
@@ -202,6 +203,7 @@ namespace SimpleNodeEditor
             m_closeBoxPos = new Rect(Position.x + 5, Position.y - 25, 20, 20);
 
         }
+#endif
 
         public void BreakAllLets()
         {

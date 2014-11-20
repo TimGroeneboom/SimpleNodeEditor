@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 namespace SimpleNodeEditor
 {
@@ -47,6 +50,7 @@ namespace SimpleNodeEditor
             outlet.yOffset = 25;
         }
 
+#if UNITY_EDITOR
         public override void WindowCallback(int id)
         {
             GUI.BeginGroup(new Rect(5, 50, 100, 50));
@@ -56,6 +60,7 @@ namespace SimpleNodeEditor
 
             base.WindowCallback(id);
         }
+#endif
 
         void Update()
         {

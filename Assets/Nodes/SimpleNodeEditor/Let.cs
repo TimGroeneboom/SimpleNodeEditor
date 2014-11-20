@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
+
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
+
 using System.Collections;
 using System.Collections.Generic;
 
@@ -45,35 +49,6 @@ namespace SimpleNodeEditor
         public abstract void Construct(BaseNode owner);
         public abstract void Construct(BaseNode owner, Rect offset);
 
-        public virtual void DrawLet(Rect position)
-        {
-            Position = new Rect(position.x + Offset.x, position.y + Offset.y + yOffset, Offset.width, Offset.height);
-            GUI.Box(Position, "");
-        }
-
-        public virtual bool MouseOver(Vector2 mousePos)
-        {
-            if (mousePos.x > Position.x - m_hitArea.x && mousePos.x < Position.x + Position.width + m_hitArea.x &&
-                mousePos.y > Position.y - m_hitArea.y && mousePos.y < Position.y + Position.height + m_hitArea.y)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        public virtual bool MouseDrag(Vector2 mousePos)
-        {
-            if (mousePos.x > Position.x - m_hitArea.x && mousePos.x < Position.x + Position.width + m_hitArea.x &&
-                mousePos.y > Position.y - m_hitArea.y && mousePos.y < Position.y + Position.height + m_hitArea.y)
-            {
-                LetDrag(this, Type);
-                return true;
-            }
-
-            return false;
-        }
-
         public void RemoveConnection(Let letToRemove)
         {
             Connections.Remove(letToRemove);
@@ -102,6 +77,36 @@ namespace SimpleNodeEditor
             }
 
             Connections.Clear();
+        }
+
+#if UNITY_EDITOR
+        public virtual void DrawLet(Rect position)
+        {
+            Position = new Rect(position.x + Offset.x, position.y + Offset.y + yOffset, Offset.width, Offset.height);
+            GUI.Box(Position, "");
+        }
+
+        public virtual bool MouseOver(Vector2 mousePos)
+        {
+            if (mousePos.x > Position.x - m_hitArea.x && mousePos.x < Position.x + Position.width + m_hitArea.x &&
+                mousePos.y > Position.y - m_hitArea.y && mousePos.y < Position.y + Position.height + m_hitArea.y)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public virtual bool MouseDrag(Vector2 mousePos)
+        {
+            if (mousePos.x > Position.x - m_hitArea.x && mousePos.x < Position.x + Position.width + m_hitArea.x &&
+                mousePos.y > Position.y - m_hitArea.y && mousePos.y < Position.y + Position.height + m_hitArea.y)
+            {
+                LetDrag(this, Type);
+                return true;
+            }
+
+            return false;
         }
 
         public virtual bool MouseDown(Vector2 mousePos, int button)
@@ -143,7 +148,7 @@ namespace SimpleNodeEditor
         {
             GUI.Label(new Rect(10, 20 + yOffset, 80, 20), Name);
         }
+#endif
     }
-
 }
 
