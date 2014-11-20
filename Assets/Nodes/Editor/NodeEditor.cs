@@ -7,6 +7,8 @@ namespace SimpleNodeEditor
 {
     public class NodeEditor : EditorWindow
     {
+        public Color ConnectionColor = Color.green;
+
         protected List<BaseNode> m_nodes = new List<BaseNode>();
 
         protected int NodeID = 0;
@@ -286,7 +288,7 @@ namespace SimpleNodeEditor
                     {
                         for (int k = 0; k < outlet.Connections.Count; k++)
                         {
-                            DrawConnection(outlet.Connections[k].Position.center, outlet.Position.center, Color.blue);
+                            DrawConnection(outlet.Connections[k].Position.center, outlet.Position.center, ConnectionColor);
                         }
                     }
                 }

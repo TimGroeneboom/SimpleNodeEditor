@@ -9,11 +9,14 @@ namespace SimpleNodeEditor
     {
         public override void OnInspectorGUI()
         {
+            base.OnInspectorGUI();
+
             NodeGraph myTarget = (NodeGraph)target;
 
             if( GUILayout.Button("Show Graph") )
             {
                 NodeEditor nodeEditor = (NodeEditor)EditorWindow.GetWindow(typeof(NodeEditor));
+                nodeEditor.ConnectionColor = myTarget.ConnectionColor;
                 nodeEditor.Root = myTarget.gameObject;
                 nodeEditor.Show();
             }

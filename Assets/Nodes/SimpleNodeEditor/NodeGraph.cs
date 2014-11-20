@@ -6,9 +6,7 @@ namespace SimpleNodeEditor
 {
     public class NodeGraph : MonoBehaviour
     {
-        void Start()
-        {
-
-        }
+        public Color ConnectionColor = Color.green;
+     //   public Color ConnectionColor = Color.Green;
     }
 }
