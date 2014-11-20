@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace SimpleNodeEditor
 {
     public class NodeEditor : EditorWindow
     {
-        protected List<SimpleNode> m_nodes = new List<SimpleNode>();
-        protected List<Connection> m_connections = new List<Connection>();
+        protected List<BaseNode> m_nodes = new List<BaseNode>();
 
         protected int NodeID = 0;
         protected MouseModes m_currentMouseMode = MouseModes.IDLE;
@@ -15,7 +15,55 @@ namespace SimpleNodeEditor
 
         protected Vector2 m_startMousePos = Vector2.zero;
 
-        [MenuItem("Window/Simple node editor")]
+        private GameObject m_root = null;
+        public GameObject Root
+        {
+            set
+            {
+                m_root = value;
+                Construct();
+            }
+            get
+            {
+                return m_root;
+            }
+        }
+
+        void Construct()
+        {
+            if (Root == null)
+                return;
+
+            m_nodes.Clear();
+            BaseNode[] nodes = m_root.GetComponentsInChildren<BaseNode>();
+
+            foreach (BaseNode node in nodes)
+            {
+                if (node.transform.parent == Root.transform)
+                {
+                    m_nodes.Add(node);
+
+                    node.Id = NodeID;
+
+                    for (int i = 0; i < node.Lets.Count; i++)
+                    {
+                        node.Lets[i].LetClicked += OnLetPressed;
+                        node.Lets[i].LetDrag += OnLetDrag;
+                        node.Lets[i].LetUp += OnLetUp;
+                    }
+
+                    NodeID++;
+                }
+            }
+
+            Repaint();
+        }
+
+        void OnHierarchyChange()
+        {
+            Construct();
+        }
+
         static void ShowEditor()
         {
             EditorWindow.GetWindow<NodeEditor>();
@@ -51,19 +99,6 @@ namespace SimpleNodeEditor
 
         void OnBreakAllConnections(object sender, LetTypes type)
         {
-            List<Connection> connectionsToDelete = new List<Connection>();
-            foreach (Connection connection in m_connections)
-            {
-                if (sender == connection.Inlet || sender == connection.Outlet)
-                {
-                    connectionsToDelete.Add(connection);
-                }
-            }
-
-            foreach (Connection connection in connectionsToDelete)
-            {
-                m_connections.Remove(connection);
-            }
         }
 
         void OnLetUp(object sender, LetTypes type)
@@ -76,22 +111,33 @@ namespace SimpleNodeEditor
                     if ((m_currentSelectedLet.Type == LetTypes.INLET && type == LetTypes.OUTLET) ||
                         (m_currentSelectedLet.Type == LetTypes.OUTLET && type == LetTypes.INLET))
                     {
-                        Inlet inlet = null;
-                        Outlet outlet = null;
+                        Let inlet = null;
+                        Let outlet = null;
 
                         if (m_currentSelectedLet.Type == LetTypes.INLET)
                         {
-                            inlet = (Inlet)m_currentSelectedLet;
-                            outlet = (Outlet)sender;
+                            inlet = m_currentSelectedLet;
+                            outlet = (Let)sender;
                         }
                         else
                         {
-                            outlet = (Outlet)m_currentSelectedLet;
-                            inlet = (Inlet)sender;
+                            outlet = m_currentSelectedLet;
+                            inlet = (Let)sender;
                         }
 
-                        Connection connection = new Connection(inlet, outlet);
-                        m_connections.Add(connection);
+                        if( !inlet.Connections.Contains(outlet) && !outlet.Connections.Contains(inlet) )
+                        {
+                            inlet.Connections.Add(outlet);
+                            outlet.Connections.Add(inlet);
+
+                            if(Application.isPlaying)
+                            {
+                                ((Outlet)outlet).Emit += ((Inlet)inlet).Slot;
+                            }
+                        }
+                        else
+                        {
+                        }
                     }
                 }
             }
@@ -102,18 +148,22 @@ namespace SimpleNodeEditor
             // TODO : make this better ( for example, get the first available NodeID )
             NodeID++;
 
-            SimpleNode node = (SimpleNode)System.Activator.CreateInstance(nodeType);
-            node.Id = NodeID;
-            node.Position = new Vector2(pos.x, pos.y);
-            m_nodes.Add(node);
+            GameObject nodeObject = new GameObject("Node");
+            BaseNode simpleNode = (BaseNode) nodeObject.AddComponent(nodeType);
 
-            for (int i = 0; i < node.Lets.Count; i++)
+            simpleNode.Construct();
+            simpleNode.Id = NodeID;
+            simpleNode.Position = new Vector2(pos.x, pos.y);
+            m_nodes.Add(simpleNode);
+
+            for (int i = 0; i < simpleNode.Lets.Count; i++)
             {
-                node.Lets[i].LetClicked += OnLetPressed;
-                node.Lets[i].LetDrag += OnLetDrag;
-                node.Lets[i].LetUp += OnLetUp;
-                node.Lets[i].BreakAllConnections += OnBreakAllConnections;
+                simpleNode.Lets[i].LetClicked += OnLetPressed;
+                simpleNode.Lets[i].LetDrag += OnLetDrag;
+                simpleNode.Lets[i].LetUp += OnLetUp;
             }
+
+            simpleNode.transform.parent = Root.transform;
         }
 
         void CreateNodeMenu()
@@ -226,15 +276,26 @@ namespace SimpleNodeEditor
                 Repaint();
             }
 
-            for (int i = 0; i < m_connections.Count; i++)
+
+            for (int i = 0; i < m_nodes.Count; i++ )
             {
-                DrawConnection(m_connections[i].Inlet.Position.center, m_connections[i].Outlet.Position.center, Color.blue);
+                for(int j = 0 ; j < m_nodes[i].Lets.Count; j++)
+                {
+                    Let outlet = m_nodes[i].Lets[j];
+                    if (outlet.Type == LetTypes.OUTLET)
+                    {
+                        for (int k = 0; k < outlet.Connections.Count; k++)
+                        {
+                            DrawConnection(outlet.Connections[k].Position.center, outlet.Position.center, Color.blue);
+                        }
+                    }
+                }
             }
 
             EndWindows();
 
-            List<SimpleNode> nodesToDelete = new List<SimpleNode>();
-            foreach (SimpleNode node in m_nodes)
+            List<BaseNode> nodesToDelete = new List<BaseNode>();
+            foreach (BaseNode node in m_nodes)
             {
                 if (!node.Valid)
                 {
@@ -242,13 +303,31 @@ namespace SimpleNodeEditor
                 }
             }
 
-            foreach (SimpleNode node in nodesToDelete)
+            foreach (BaseNode node in nodesToDelete)
             {
                 m_nodes.Remove(node);
+
+                node.BreakAllLets();
+
+                DestroyImmediate(node.gameObject);
             }
 
             if( nodesToDelete.Count > 0)
                 Repaint();
+        }
+
+        void OnDestroy()
+        {
+            // Delete all listeners
+            foreach(BaseNode simpleNode in m_nodes )
+            {
+                for (int i = 0; i < simpleNode.Lets.Count; i++)
+                {
+                    simpleNode.Lets[i].LetClicked -= OnLetPressed;
+                    simpleNode.Lets[i].LetDrag -= OnLetDrag;
+                    simpleNode.Lets[i].LetUp -= OnLetUp;
+                }
+            }
         }
 
         void DrawConnection(Vector2 start, Vector2 end, Color color)

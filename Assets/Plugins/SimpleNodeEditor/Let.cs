@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace SimpleNodeEditor
 {
@@ -13,13 +14,17 @@ namespace SimpleNodeEditor
 
     public delegate void LetEventHandler(object sender, LetTypes type);
 
-    public class Let
+    [System.Serializable]
+    public abstract class Let 
+        : MonoBehaviour
     {
-        protected SimpleNode m_owner = null;
-        public SimpleNode Owner { get { return m_owner; } }
+        [SerializeField]
+        protected BaseNode m_owner = null;
+        public BaseNode Owner { get { return m_owner; } set { m_owner = value; } }
 
         public int yOffset = 0;
 
+        [SerializeField]
         protected Vector2 m_hitArea = new Vector2(10, 10);
 
         public Rect Offset = new Rect(0, 0, 0, 0);
@@ -30,15 +35,15 @@ namespace SimpleNodeEditor
         public LetEventHandler LetClicked = (object sender, LetTypes type) => { };
         public LetEventHandler LetDrag = (object sender, LetTypes type) => { };
         public LetEventHandler LetUp = (object sender, LetTypes type) => { };
-        public LetEventHandler BreakAllConnections = (object sender, LetTypes type) => { };
 
+        public List<Let> Connections = new List<Let>();
+
+        [SerializeField]
         protected LetTypes m_type = LetTypes.UNDEFINED;
         public LetTypes Type { get { return m_type; } }
 
-        protected Let(SimpleNode owner)
-        {
-            m_owner = owner;
-        }
+        public abstract void Construct(BaseNode owner);
+        public abstract void Construct(BaseNode owner, Rect offset);
 
         public virtual void DrawLet(Rect position)
         {
@@ -69,6 +74,36 @@ namespace SimpleNodeEditor
             return false;
         }
 
+        public void RemoveConnection(Let letToRemove)
+        {
+            Connections.Remove(letToRemove);
+        }
+
+        public void BreakAllConnections()
+        {
+            if (Type == LetTypes.INLET)
+            {
+                for (int i = 0; i < Connections.Count; i++)
+                {
+                    ((Outlet)Connections[i]).Emit -= ((Inlet)this).Slot;
+                }
+            }
+            else if (Type == LetTypes.OUTLET)
+            {
+                for (int i = 0; i < Connections.Count; i++)
+                {
+                    ((Outlet)this).Emit -= ((Inlet)Connections[i]).Slot;
+                }
+            }
+
+            for (int i = 0; i < Connections.Count; i++)
+            {
+                Connections[i].RemoveConnection(this);
+            }
+
+            Connections.Clear();
+        }
+
         public virtual bool MouseDown(Vector2 mousePos, int button)
         {
             if (mousePos.x > Position.x - m_hitArea.x && mousePos.x < Position.x + Position.width + m_hitArea.x &&
@@ -81,10 +116,7 @@ namespace SimpleNodeEditor
                 else if (button == 1)
                 {
                     GenericMenu genericMenu = new GenericMenu();
-                    genericMenu.AddItem(new GUIContent("Break all connections"), false, () =>
-                    {
-                        BreakAllConnections(this, Type);
-                    }); ;
+                    genericMenu.AddItem(new GUIContent("Break all connections"), false, BreakAllConnections);
 
                     genericMenu.ShowAsContext();
                 }

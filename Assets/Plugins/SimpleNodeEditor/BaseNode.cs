@@ -4,15 +4,30 @@ using System.Collections.Generic;
 
 namespace SimpleNodeEditor
 {
-    [NodeMenuItem("SimpleNode", typeof(SimpleNode))]
-    public class SimpleNode
+    [System.Serializable]
+    public abstract class BaseNode 
+        : MonoBehaviour
     {
+        [SerializeField]
         protected Rect m_rect;
         public Rect Rect { get { return m_rect; } }
         public int Id = 0;
 
-        public string Name = "Node";
+        private string m_name = "Node";
+        public string Name
+        {
+            get
+            {
+                return m_name;
+            }
+            set
+            {
+                gameObject.name = value;
+                m_name = value;
+            }
+        }
 
+        [SerializeField]
         private Vector2 m_position = new Vector2(10,10);
         public Vector2 Position
         {
@@ -27,6 +42,7 @@ namespace SimpleNodeEditor
             }
         }
        
+        [SerializeField]
         private Vector2 m_size = new Vector2(100,100);
         public Vector2 Size
         {
@@ -44,26 +60,56 @@ namespace SimpleNodeEditor
         protected bool m_valid = true;
         public bool Valid { get { return m_valid; } }
 
+        [SerializeField]
         protected List<Let> m_lets = new List<Let>();
         public List<Let> Lets { get { return m_lets; } }
 
+        [SerializeField]
         protected Rect m_closeBoxPos = new Rect(10, -20, 10, 20);
-        
-        public SimpleNode() 
+
+        protected Let MakeLet(LetTypes type)
         {
-            Size = new Vector2(100, 100);
+            Let let = null;
 
-            Inlet inlet = new Inlet(this);
-            m_lets.Add(inlet);
+            switch(type)
+            {
+                case LetTypes.INLET:
+                    let = gameObject.AddComponent<Inlet>();
+                    break;
+                case LetTypes.OUTLET:
+                    let = gameObject.AddComponent<Outlet>();
+                    break;
+            }
 
-            Outlet outlet = new Outlet(this);
-            outlet.yOffset = 25;
-            m_lets.Add(outlet);
+            let.Construct(this);
+
+            m_lets.Add(let);
+
+            return let;
         }
 
-        public virtual void Draw()
+        void Start()
         {
-            m_rect = GUI.Window(Id, m_rect, WindowCallback, Name);
+            for (int i = 0; i < m_lets.Count; i++)
+            {
+                if(m_lets[i].Type == LetTypes.OUTLET)
+                {
+                    for(int j = 0 ; j < m_lets[i].Connections.Count; j++)
+                    {
+                        ((Outlet)m_lets[i]).Emit += ((Inlet)m_lets[i].Connections[j]).Slot;
+                    }
+                }
+            }
+
+            Inited();
+        }
+
+        public abstract void Construct();
+        protected abstract void Inited();
+
+        public void Draw()
+        {
+            m_rect = GUI.Window(Id, m_rect, WindowCallback, gameObject.name);
 
             Position = new Vector2(m_rect.x, m_rect.y);
             m_size = new Vector2(m_rect.width, m_rect.height);
@@ -124,11 +170,6 @@ namespace SimpleNodeEditor
             if (!handled && m_closeBoxPos.Contains(mousePos))
             {
                 m_valid = false;
-
-                foreach (Let let in m_lets)
-                {
-                    let.BreakAllConnections(let, let.Type);
-                }
             }
 
             return handled;
@@ -159,6 +200,20 @@ namespace SimpleNodeEditor
             }
 
             m_closeBoxPos = new Rect(Position.x + 5, Position.y - 25, 20, 20);
+
+        }
+
+        public void BreakAllLets()
+        {
+            foreach (Let let in m_lets)
+            {
+                let.BreakAllConnections();
+            }
+        }
+
+        void OnDestroy()
+        {
+            BreakAllLets();
         }
     }
 }

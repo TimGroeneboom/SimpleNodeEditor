@@ -3,20 +3,25 @@ using System.Collections;
 
 namespace SimpleNodeEditor
 {
+    [System.Serializable]
     public class Outlet : Let
     {
-        public Outlet(SimpleNode owner)
-            : base(owner)
+        public SignalHandler Emit = (Signal signal) => { };
+
+        override public void Construct(BaseNode owner)
         {
+            Owner = owner;
+
             Offset = new Rect(owner.Size.x - 5, 24, 10, 10);
             m_type = LetTypes.OUTLET;
 
             Name = "Outlet";
         }
 
-        public Outlet(SimpleNode owner, Rect offset)
-            : base(owner)
+        override public void Construct(BaseNode owner, Rect offset)
         {
+            Owner = owner;
+
             m_type = LetTypes.OUTLET;
             Offset = offset;
 
