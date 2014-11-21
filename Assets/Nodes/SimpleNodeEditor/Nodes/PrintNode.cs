@@ -35,7 +35,7 @@ namespace SimpleNodeEditor
             input.yOffset = 25;
             input.Name = "Input";
 
-            Size = new Vector2(Size.x, 100);
+            Size = new Vector2(200, 100);
         }
 
         void OnSignalReceived(Signal signal)
@@ -45,19 +45,25 @@ namespace SimpleNodeEditor
 
         void OnInputReceived(Signal signal)
         {
-            SignalTextArgs textArgs = (SignalTextArgs)signal.Args;
-            if(textArgs!=null)
+            switch(signal.Args.Type)
             {
-                Value = textArgs.Text;
+                case SignalTypes.TEXT:
+                    SignalTextArgs textArgs = signal.Args as SignalTextArgs;
+                    Value = textArgs.Text;
+                    break;
+                case SignalTypes.FLOAT:
+                    SignalFloatArgs floatArgs = signal.Args as SignalFloatArgs;
+                    Value = floatArgs.Value.ToString();
+                    break;
             }
         }
 
 #if UNITY_EDITOR
         public override void WindowCallback(int id)
         {
-            GUI.BeginGroup(new Rect(5, 50, 100, 50));
+            GUI.BeginGroup(new Rect(5, 50, 200, 50));
 
-            Value = GUILayout.TextField(Value, GUILayout.MaxWidth(80));
+            Value = GUILayout.TextField(Value, GUILayout.MaxWidth(180));
 
             GUI.EndGroup();
 

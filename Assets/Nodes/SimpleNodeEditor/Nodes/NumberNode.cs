@@ -7,13 +7,13 @@ using UnityEditor;
 
 namespace SimpleNodeEditor
 {
-    [NodeMenuItem("TextNode", typeof(TextNode))]
-    public class TextNode : BaseNode
+    [NodeMenuItem("NumberNode", typeof(NumberNode))]
+    public class NumberNode : BaseNode
     {
         [SerializeField]
         Outlet outlet = null;
 
-        public string Value = "";
+        public float Value = 0.0f;
 
         protected override void Inited()
         {
@@ -21,29 +21,27 @@ namespace SimpleNodeEditor
 
         public override void Construct()
         {
-            Name = "TextNode";
+            Name = "NumberNode";
 
             outlet = (Outlet)MakeLet(LetTypes.OUTLET);
 
-            Size = new Vector2(200, 100);
+            Size = new Vector2(Size.x, 100);
         }
 
 #if UNITY_EDITOR
         public override void WindowCallback(int id)
         {
-            GUI.BeginGroup(new Rect(5, 25, 180, 75));
+            GUI.BeginGroup(new Rect(5, 25, 100, 75));
             //EditorGUIUtility.LookLikeControls(30, 30);
 
-            Value = GUILayout.TextField(Value, GUILayout.MaxWidth(180));
+            Value = EditorGUILayout.FloatField(Value, GUILayout.MaxWidth(80));
 
-            EditorGUILayout.Space();
-
-            if (GUILayout.Button("Emit", GUILayout.MaxWidth(180)))
+            if (GUILayout.Button("Emit", GUILayout.MaxWidth(80)))
             {
-                SignalTextArgs textArgs = new SignalTextArgs();
-                textArgs.Text = Value;
+                SignalFloatArgs floatArgs = new SignalFloatArgs();
+                floatArgs.Value = Value;
 
-                outlet.Emit(new Signal(outlet, textArgs));
+                outlet.Emit(new Signal(outlet, floatArgs));
             }
 
             GUI.EndGroup();

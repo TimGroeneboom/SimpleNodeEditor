@@ -50,6 +50,17 @@ namespace SimpleNodeEditor
             {
                 m_size = value;
                 m_rect = new Rect(Position.x, Position.y, m_size.x, m_size.y);
+
+                // Reposition outlets if size changes
+                for(int i = 0 ; i < m_lets.Count; i++ )
+                {
+                    Outlet outlet = m_lets[i] as Outlet;
+
+                    if(outlet!=null)
+                    {
+                        outlet.Offset.x = Size.x - 5;
+                    }
+                }
             }
             get
             {
@@ -94,10 +105,8 @@ namespace SimpleNodeEditor
             {
                 if(m_lets[i].Type == LetTypes.OUTLET)
                 {
-                    for(int j = 0 ; j < m_lets[i].Connections.Count; j++)
-                    {
-                        ((Outlet)m_lets[i]).Emit += ((Inlet)m_lets[i].Connections[j]).Slot;
-                    }
+                    Outlet outlet = (Outlet)m_lets[i];
+                    outlet.MakeConnections();
                 }
             }
 
@@ -112,7 +121,30 @@ namespace SimpleNodeEditor
         {
             m_rect = GUI.Window(Id, m_rect, WindowCallback, gameObject.name);
 
-            Position = new Vector2(m_rect.x, m_rect.y);
+            Vector2 newPos = new Vector2(m_rect.x, m_rect.y);
+
+            if( newPos != Position )
+            {
+                for(int i = 0; i < m_lets.Count; i++ )
+                {
+                    switch(m_lets[i].Type)
+                    {
+                        case LetTypes.INLET:
+                            Inlet inlet = m_lets[i] as Inlet;
+                            for (int j = 0; j < inlet.Connections.Count; j++ )
+                            {
+                                ((Outlet)inlet.Connections[i]).MakeConnections();
+                            }
+                            break;
+                        case LetTypes.OUTLET:
+                            Outlet outlet = m_lets[i] as Outlet;
+                            outlet.MakeConnections();
+                            break;
+                    }
+                }
+            }
+
+            Position = newPos;
             m_size = new Vector2(m_rect.width, m_rect.height);
 
             // Draw Let(s)
@@ -201,7 +233,6 @@ namespace SimpleNodeEditor
             }
 
             m_closeBoxPos = new Rect(Position.x + 5, Position.y - 25, 20, 20);
-
         }
 #endif
 

@@ -4,6 +4,7 @@
 using UnityEditor;
 #endif
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -20,7 +21,7 @@ namespace SimpleNodeEditor
 
     [System.Serializable]
     public abstract class Let 
-        : MonoBehaviour
+        : MonoBehaviour, IComparable<Let>
     {
         [SerializeField]
         protected BaseNode m_owner = null;
@@ -49,7 +50,17 @@ namespace SimpleNodeEditor
         public abstract void Construct(BaseNode owner);
         public abstract void Construct(BaseNode owner, Rect offset);
 
-        public void RemoveConnection(Let letToRemove)
+        public int CompareTo(Let compareLet)
+        {
+            // A null value means that this object is greater. 
+            if (compareLet == null)
+                return 1;
+
+            else
+                return this.Position.y.CompareTo(compareLet.Position.y);
+        }
+
+        public virtual void RemoveLet(Let letToRemove)
         {
             Connections.Remove(letToRemove);
         }
@@ -73,7 +84,7 @@ namespace SimpleNodeEditor
 
             for (int i = 0; i < Connections.Count; i++)
             {
-                Connections[i].RemoveConnection(this);
+                Connections[i].RemoveLet(this);
             }
 
             Connections.Clear();

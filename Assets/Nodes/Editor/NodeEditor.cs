@@ -134,7 +134,8 @@ namespace SimpleNodeEditor
 
                             if(Application.isPlaying)
                             {
-                                ((Outlet)outlet).Emit += ((Inlet)inlet).Slot;
+                                ((Outlet)outlet).MakeConnections();
+                             //   ((Outlet)outlet).Emit += ((Inlet)inlet).Slot;
                             }
                         }
                         else
@@ -200,6 +201,19 @@ namespace SimpleNodeEditor
             genericMenu.ShowAsContext();
         }
 
+        void BreakConnectionMenu(Inlet inlet, Outlet outlet)
+        {
+            GenericMenu genericMenu = new GenericMenu();
+
+            genericMenu.AddItem(new GUIContent("Break Connection"), false, () =>
+            {
+                inlet.RemoveLet(outlet);
+                outlet.RemoveLet(inlet);
+            });
+
+            genericMenu.ShowAsContext();
+        }
+
         void OnGUI()
         {
             BeginWindows();
@@ -209,12 +223,48 @@ namespace SimpleNodeEditor
                 m_nodes[i].Draw();
             }
 
+            bool connectionSelected = false;
+            Outlet outletSelected = null;
+            Inlet inletSelected = null;
+
+            for (int i = 0; i < m_nodes.Count; i++)
+            {
+                for (int j = 0; j < m_nodes[i].Lets.Count; j++)
+                {
+                    Let outlet = m_nodes[i].Lets[j];
+                    if (outlet.Type == LetTypes.OUTLET)
+                    {
+                        for (int k = 0; k < outlet.Connections.Count; k++)
+                        {
+                            if (DrawConnection(outlet.Connections[k].Position.center, outlet.Position.center, ConnectionColor))
+                            {
+                                connectionSelected = true;
+                                outletSelected = (Outlet)outlet;
+                                inletSelected = (Inlet)outlet.Connections[k];
+                            }
+                        }
+                    }
+                }
+            }
+
             if (Event.current.type == EventType.MouseMove)
             {
+                bool handled = false;
                 for (int i = 0; i < m_nodes.Count; i++)
                 {
-                    m_nodes[i].MouseOver(Event.current.mousePosition);
+                    if( m_nodes[i].MouseOver(Event.current.mousePosition) )
+                    {
+                        handled = true;
+                        break;
+                    }
                 }
+
+                if( !handled )
+                {
+
+                }
+
+                Repaint();
             }
             else if (Event.current.type == EventType.MouseDown && m_currentMouseMode != MouseModes.CONNECTING)
             {
@@ -227,7 +277,13 @@ namespace SimpleNodeEditor
 
                 if (!handled && Event.current.button == 1)
                 {
-                    CreateNodeMenu();
+                    if (!connectionSelected )
+                    {
+                        CreateNodeMenu();
+                    }else
+                    {
+                        BreakConnectionMenu(inletSelected, outletSelected);
+                    }
                 }else if(!handled && Event.current.button == 0)
                 {
                     m_startMousePos = Event.current.mousePosition;
@@ -278,22 +334,6 @@ namespace SimpleNodeEditor
                 Repaint();
             }
 
-
-            for (int i = 0; i < m_nodes.Count; i++ )
-            {
-                for(int j = 0 ; j < m_nodes[i].Lets.Count; j++)
-                {
-                    Let outlet = m_nodes[i].Lets[j];
-                    if (outlet.Type == LetTypes.OUTLET)
-                    {
-                        for (int k = 0; k < outlet.Connections.Count; k++)
-                        {
-                            DrawConnection(outlet.Connections[k].Position.center, outlet.Position.center, ConnectionColor);
-                        }
-                    }
-                }
-            }
-
             EndWindows();
 
             List<BaseNode> nodesToDelete = new List<BaseNode>();
@@ -332,8 +372,18 @@ namespace SimpleNodeEditor
             }
         }
 
-        void DrawConnection(Vector2 start, Vector2 end, Color color)
+        bool DrawConnection(Vector2 start, Vector2 end, Color color)
         {
+            bool mouseOver = false;
+
+            // check if cursor intersects line segment
+            if (DistancePointLine(Event.current.mousePosition, start, end) < 20.0f)
+            {
+                color = Color.blue;
+                mouseOver = true;
+            }
+
+            /*
             Vector3 startPos = new Vector3(start.x, start.y, 0);
             Vector3 endPos = new Vector3(end.x, end.y, 0);
 
@@ -341,10 +391,19 @@ namespace SimpleNodeEditor
             Vector3 endTan = endPos + Vector3.right * 50;
 
             Handles.DrawBezier(startPos, endPos, startTan, endTan, color, null, 2);
+            */
+
+            Color guiColor = Handles.color;
+            Handles.color = color;
+            Handles.DrawLine(start, end);
+            GUI.color = guiColor;
+
+            return mouseOver;
         }
 
         void DrawConnectingCurve(Vector2 start, Vector2 end)
         {
+            /*
             Vector3 startPos = new Vector3(start.x, start.y, 0);
             Vector3 endPos = new Vector3(end.x, end.y, 0);
 
@@ -356,8 +415,35 @@ namespace SimpleNodeEditor
                 startTan = startPos + Vector3.right * 50;
                 endTan = endPos + Vector3.left * 50;
             }
+             Handles.DrawBezier(startPos, endPos, startTan, endTan, Color.red, null, 4);
+             */
 
-            Handles.DrawBezier(startPos, endPos, startTan, endTan, Color.red, null, 4);
+
+            Color guiColor = Handles.color;
+            Handles.color = Color.red;
+            Handles.DrawLine(start, end);
+            GUI.color = guiColor;
+
+            
+        }
+
+        public static float DistancePointLine(Vector3 point, Vector3 lineStart, Vector3 lineEnd)
+        {
+            return Vector3.Magnitude(ProjectPointLine(point, lineStart, lineEnd) - point);
+        }
+
+        public static Vector3 ProjectPointLine(Vector3 point, Vector3 lineStart, Vector3 lineEnd)
+        {
+            Vector3 rhs = point - lineStart;
+            Vector3 vector2 = lineEnd - lineStart;
+            float magnitude = vector2.magnitude;
+            Vector3 lhs = vector2;
+            if (magnitude > 1E-06f)
+            {
+                lhs = (Vector3)(lhs / magnitude);
+            }
+            float num2 = Mathf.Clamp(Vector3.Dot(lhs, rhs), 0f, magnitude);
+            return (lineStart + ((Vector3)(lhs * num2)));
         }
     }
 }

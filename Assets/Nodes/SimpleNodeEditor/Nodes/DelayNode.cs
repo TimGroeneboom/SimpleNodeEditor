@@ -26,13 +26,14 @@ namespace SimpleNodeEditor
         Outlet outlet = null;
 
         List<DelayedSignal> m_delayedSignals = new List<DelayedSignal>();
+        List<DelayedSignal> m_signalsToAdd = new List<DelayedSignal>();
 
         void OnInlet(Signal signal)
         {
             DelayedSignal delayedSignal = new DelayedSignal();
             delayedSignal.Signal = signal;
 
-            m_delayedSignals.Add(delayedSignal);
+            m_signalsToAdd.Add(delayedSignal);
         }
 
         protected override void Inited()
@@ -48,6 +49,8 @@ namespace SimpleNodeEditor
 
             outlet = (Outlet) MakeLet(LetTypes.OUTLET);
             outlet.yOffset = 25;
+
+            Size = new Vector2(125, Size.y);
         }
 
 #if UNITY_EDITOR
@@ -64,6 +67,14 @@ namespace SimpleNodeEditor
 
         void Update()
         {
+            if (m_signalsToAdd.Count > 0)
+            {
+                foreach (DelayedSignal delayedSignal in m_signalsToAdd)
+                    m_delayedSignals.Add(delayedSignal);
+
+                m_signalsToAdd.Clear();
+            }
+
             if( m_delayedSignals.Count > 0 )
             {
                 List<DelayedSignal> SignalsToRemove = null;

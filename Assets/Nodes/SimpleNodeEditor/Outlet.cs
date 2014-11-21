@@ -27,5 +27,35 @@ namespace SimpleNodeEditor
 
             Name = "Outlet";
         }
+
+        // Sort connections from top to bottom
+        void SortConnections()
+        {
+            Connections.Sort();
+        }
+
+        public override void RemoveLet(Let letToRemove)
+        {
+            base.RemoveLet(letToRemove);
+            MakeConnections();
+        }
+
+        public void MakeConnections()
+        {
+            // clear signals
+            if (Connections.Count == 0)
+                Emit = (Signal signal) => { };
+            else
+                Emit = null;
+
+            // 
+            SortConnections();
+
+            // finally connect the slots
+            for (int i = 0; i < Connections.Count; i++)
+            {
+                Emit += ((Inlet)Connections[i]).Slot;
+            }
+        }
     }
 }
