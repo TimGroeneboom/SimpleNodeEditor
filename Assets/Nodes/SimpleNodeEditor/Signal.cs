@@ -63,14 +63,14 @@ namespace SimpleNodeEditor
                     return true;
                 case SignalTypes.STRING:
                     result = false;
-                    if (bool.TryParse(((SignalStringArgs)args).String, out result))
+                    if (bool.TryParse(((SignalStringArgs)args).Value, out result))
                     {
                         value = result;
                         return true;
                     }
                     else
                     {
-                        Debug.LogWarning("Cannot convert " + ((SignalStringArgs)args).String + "to bool");
+                        Debug.LogWarning("Cannot convert " + ((SignalStringArgs)args).Value + "to bool");
                     }
                     break;
                 default:
@@ -94,18 +94,49 @@ namespace SimpleNodeEditor
                     return true;
                 case SignalTypes.STRING:
                     result = 0;
-                    if (int.TryParse(((SignalStringArgs)args).String, out result))
+                    if (int.TryParse(((SignalStringArgs)args).Value, out result))
                     {
                         value = result;
                         return true;
                     }
                     else
                     {
-                        Debug.LogWarning("Cannot convert " + ((SignalStringArgs)args).String + "to int");
+                        Debug.LogWarning("Cannot convert " + ((SignalStringArgs)args).Value + "to int");
                     }
                     break;
                 default:
                     Debug.LogWarning("Cannot convert signal of type " + args.ToString() + " to int");
+                    break;
+            }
+
+            value = result;
+
+            return false;
+        }
+
+        static public bool TryParseFloat(SignalArgs args, out float value)
+        {
+            float result = 0;
+            switch (args.Type)
+            {
+                case SignalTypes.FLOAT:
+                    result = ((SignalFloatArgs)args).Value;
+                    value = result;
+                    return true;
+                case SignalTypes.STRING:
+                    result = 0;
+                    if (float.TryParse(((SignalStringArgs)args).Value, out result))
+                    {
+                        value = result;
+                        return true;
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Cannot convert " + ((SignalStringArgs)args).Value + "to float");
+                    }
+                    break;
+                default:
+                    Debug.LogWarning("Cannot convert signal of type " + args.ToString() + " to float");
                     break;
             }
 
@@ -123,7 +154,7 @@ namespace SimpleNodeEditor
                     value = ((SignalFloatArgs)args).Value.ToString();
                     return true;
                 case SignalTypes.STRING:
-                    value = ((SignalStringArgs)args).String;
+                    value = ((SignalStringArgs)args).Value;
                     return true;
                 default:
                     Debug.LogWarning("Cannot convert signal of type " + args.ToString() + " to string");
@@ -140,13 +171,15 @@ namespace SimpleNodeEditor
     public class SignalStringArgs 
         : SignalArgs
     {
+        public SignalStringArgs(string val) : base(SignalTypes.STRING) { Value = val; }
         public SignalStringArgs() : base(SignalTypes.STRING) { }
-        public string String = "Hello World!";
+        public string Value = "Hello World!";
     };
 
     public class SignalFloatArgs
          : SignalArgs
     {
+        public SignalFloatArgs(float val) : base(SignalTypes.FLOAT) { Value = val; }
         public SignalFloatArgs() : base(SignalTypes.FLOAT) { }
         public float Value = 0.0f;
     }

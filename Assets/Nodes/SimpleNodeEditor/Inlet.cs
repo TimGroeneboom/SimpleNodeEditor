@@ -6,7 +6,7 @@ namespace SimpleNodeEditor
     [System.Serializable]
     public class Inlet : Let
     {
-        public SignalHandler SlotReceivedSignal = (Signal signal) => { };
+        public event SignalHandler SlotReceivedSignal = (Signal signal) => { };
 
         public void Slot(Signal signal)
         {

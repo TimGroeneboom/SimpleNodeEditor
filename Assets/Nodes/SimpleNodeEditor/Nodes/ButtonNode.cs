@@ -11,30 +11,47 @@ namespace SimpleNodeEditor
     public class ButtonNode : BaseNode
     {
         [SerializeField]
+        Inlet inlet = null;
+
+        [SerializeField]
         Outlet outlet = null;
+
+        void OnInletReceived(Signal signal)
+        {
+            // any signal gets converted to bang
+            outlet.Send(new SignalArgs());
+        }
 
         protected override void Inited()
         {
+            inlet.SlotReceivedSignal += OnInletReceived;
         }
 
         public override void Construct()
         {
             Name = "ButtonNode";
 
+            inlet = (Inlet)MakeLet(LetTypes.INLET);
             outlet = (Outlet)MakeLet(LetTypes.OUTLET);
+            outlet.yOffset = 25;
+            Size = new Vector2(Size.x, 100);
+        }
 
-            Size = new Vector2(Size.x, 75);
+        [ContextMenu("BANG")]
+        public void Emit()
+        {
+            outlet.Send(new SignalArgs());
         }
 
 #if UNITY_EDITOR
         public override void WindowCallback(int id)
         {
-            GUI.BeginGroup(new Rect(5, 25, 100, 50));
+            GUI.BeginGroup(new Rect(5, 50, 100, 50));
             //EditorGUIUtility.LookLikeControls(30, 30);
 
             if( GUILayout.Button("Emit", GUILayout.MaxWidth(80) ) )
             {
-                outlet.Send(new SignalArgs());
+                Emit();
             }
 
             GUI.EndGroup();

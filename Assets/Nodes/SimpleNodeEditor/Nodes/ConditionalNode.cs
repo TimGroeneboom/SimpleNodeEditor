@@ -41,7 +41,7 @@ namespace SimpleNodeEditor
                 case SignalTypes.STRING:
                     SignalStringArgs signalTextArgs = signal.Args as SignalStringArgs;
                     float result = 0.0f;
-                    if(float.TryParse(signalTextArgs.String, out result))
+                    if(float.TryParse(signalTextArgs.Value, out result))
                     {
                         if(result > Value)
                         {
@@ -59,7 +59,7 @@ namespace SimpleNodeEditor
 
         public override void Construct()
         {
-            Name = "IfNode";
+            Name = "ConditionalNode";
             
             inlet = (Inlet)MakeLet(LetTypes.INLET);
             outlet = (Outlet)MakeLet(LetTypes.OUTLET);

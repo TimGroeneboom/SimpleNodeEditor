@@ -66,5 +66,10 @@ namespace SimpleNodeEditor
         {
             Emit(new Signal(this, args));
         }
+
+        public void Send(Signal signal)
+        {
+            Emit(signal);
+        }
     }
 }
