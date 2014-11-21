@@ -90,6 +90,7 @@ namespace SimpleNodeEditor
             Connections.Clear();
         }
 
+        #region NODE_EDITOR_FUCTIONS
 #if UNITY_EDITOR
         public virtual void DrawLet(Rect position)
         {
@@ -160,6 +161,7 @@ namespace SimpleNodeEditor
             GUI.Label(new Rect(10, 20 + yOffset, 80, 20), Name);
         }
 #endif
+        #endregion
     }
 }
 

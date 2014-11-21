@@ -84,7 +84,7 @@ namespace SimpleNodeEditor
                     delayedSignal.RunningTime += Time.deltaTime;
                     if (delayedSignal.RunningTime > Delay)
                     {
-                        outlet.Emit(delayedSignal.Signal);
+                        outlet.Send(delayedSignal.Signal.Args);
 
                         if (SignalsToRemove == null)
                             SignalsToRemove = new List<DelayedSignal>();

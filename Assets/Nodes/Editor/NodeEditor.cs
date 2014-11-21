@@ -31,7 +31,7 @@ namespace SimpleNodeEditor
             }
         }
 
-        void Construct()
+        public void Construct()
         {
             if (Root == null)
                 return;
@@ -74,6 +74,7 @@ namespace SimpleNodeEditor
         void OnFocus()
         {
             wantsMouseMove = true;
+            Construct();
         }
 
         void OnLetPressed(object sender, LetTypes type)
@@ -241,6 +242,7 @@ namespace SimpleNodeEditor
                                 connectionSelected = true;
                                 outletSelected = (Outlet)outlet;
                                 inletSelected = (Inlet)outlet.Connections[k];
+                                break;
                             }
                         }
                     }
@@ -423,8 +425,6 @@ namespace SimpleNodeEditor
             Handles.color = Color.red;
             Handles.DrawLine(start, end);
             GUI.color = guiColor;
-
-            
         }
 
         public static float DistancePointLine(Vector3 point, Vector3 lineStart, Vector3 lineEnd)

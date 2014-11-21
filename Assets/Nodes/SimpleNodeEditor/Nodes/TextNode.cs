@@ -40,10 +40,10 @@ namespace SimpleNodeEditor
 
             if (GUILayout.Button("Emit", GUILayout.MaxWidth(180)))
             {
-                SignalTextArgs textArgs = new SignalTextArgs();
-                textArgs.Text = Value;
+                SignalStringArgs textArgs = new SignalStringArgs();
+                textArgs.String = Value;
 
-                outlet.Emit(new Signal(outlet, textArgs));
+                outlet.Send(textArgs);
             }
 
             GUI.EndGroup();

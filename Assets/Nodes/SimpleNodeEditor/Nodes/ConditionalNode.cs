@@ -35,17 +35,17 @@ namespace SimpleNodeEditor
                     SignalFloatArgs signalArgs = signal.Args as SignalFloatArgs;
                     if(signalArgs.Value > Value)
                     {
-                        outlet.Emit(signal);
+                        outlet.Send(signal.Args);
                     }
                     break;
-                case SignalTypes.TEXT:
-                    SignalTextArgs signalTextArgs = signal.Args as SignalTextArgs;
+                case SignalTypes.STRING:
+                    SignalStringArgs signalTextArgs = signal.Args as SignalStringArgs;
                     float result = 0.0f;
-                    if(float.TryParse(signalTextArgs.Text, out result))
+                    if(float.TryParse(signalTextArgs.String, out result))
                     {
                         if(result > Value)
                         {
-                            outlet.Emit(signal);
+                            outlet.Send(signal.Args);
                         }
                     }
                     break;

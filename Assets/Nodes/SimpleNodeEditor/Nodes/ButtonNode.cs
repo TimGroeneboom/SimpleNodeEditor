@@ -34,7 +34,7 @@ namespace SimpleNodeEditor
 
             if( GUILayout.Button("Emit", GUILayout.MaxWidth(80) ) )
             {
-                outlet.Emit(new Signal(outlet, new SignalArgs()));
+                outlet.Send(new SignalArgs());
             }
 
             GUI.EndGroup();

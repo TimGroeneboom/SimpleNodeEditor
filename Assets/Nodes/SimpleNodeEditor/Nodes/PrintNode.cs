@@ -45,16 +45,10 @@ namespace SimpleNodeEditor
 
         void OnInputReceived(Signal signal)
         {
-            switch(signal.Args.Type)
+            string val = "";
+            if( Signal.TryParseString(signal.Args, out val) )
             {
-                case SignalTypes.TEXT:
-                    SignalTextArgs textArgs = signal.Args as SignalTextArgs;
-                    Value = textArgs.Text;
-                    break;
-                case SignalTypes.FLOAT:
-                    SignalFloatArgs floatArgs = signal.Args as SignalFloatArgs;
-                    Value = floatArgs.Value.ToString();
-                    break;
+                Value = val;
             }
         }
 

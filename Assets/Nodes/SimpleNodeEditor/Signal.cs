@@ -6,7 +6,7 @@ namespace SimpleNodeEditor
     public enum SignalTypes
     {
         BANG,
-        TEXT,
+        STRING,
         FLOAT
     }
 
@@ -26,6 +26,11 @@ namespace SimpleNodeEditor
                 return m_type;
             }
         }
+
+        public override string ToString()
+        {
+            return m_type.ToString();
+        }
     };
 
     public delegate void SignalHandler(Signal signal);
@@ -40,13 +45,103 @@ namespace SimpleNodeEditor
 
         public Let Sender = null;
         public SignalArgs Args = null;
+
+        public override string ToString()
+        {
+           return Args.ToString();
+        }
+
+        #region HELPER_METHODS
+        static public bool TryParseBool(SignalArgs args, out bool value)
+        {
+            bool result = false;
+            switch (args.Type)
+            {
+                case SignalTypes.FLOAT:
+                    result = System.Convert.ToBoolean(Mathf.RoundToInt(((SignalFloatArgs)args).Value));
+                    value = result;
+                    return true;
+                case SignalTypes.STRING:
+                    result = false;
+                    if (bool.TryParse(((SignalStringArgs)args).String, out result))
+                    {
+                        value = result;
+                        return true;
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Cannot convert " + ((SignalStringArgs)args).String + "to bool");
+                    }
+                    break;
+                default:
+                    Debug.LogWarning("Cannot convert signal of type " + args.ToString() + " to bool");
+                    break;
+            }
+
+            value = result;
+
+            return false;
+        }
+        
+        static public bool TryParseInt(SignalArgs args, out int value)
+        {
+            int result = 0;
+            switch (args.Type)
+            {
+                case SignalTypes.FLOAT:
+                    result = System.Convert.ToInt32(Mathf.RoundToInt(((SignalFloatArgs)args).Value));
+                    value = result;
+                    return true;
+                case SignalTypes.STRING:
+                    result = 0;
+                    if (int.TryParse(((SignalStringArgs)args).String, out result))
+                    {
+                        value = result;
+                        return true;
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Cannot convert " + ((SignalStringArgs)args).String + "to int");
+                    }
+                    break;
+                default:
+                    Debug.LogWarning("Cannot convert signal of type " + args.ToString() + " to int");
+                    break;
+            }
+
+            value = result;
+
+            return false;
+        }
+
+        static public bool TryParseString(SignalArgs args, out string value)
+        {
+            string result = "";
+            switch (args.Type)
+            {
+                case SignalTypes.FLOAT:
+                    value = ((SignalFloatArgs)args).Value.ToString();
+                    return true;
+                case SignalTypes.STRING:
+                    value = ((SignalStringArgs)args).String;
+                    return true;
+                default:
+                    Debug.LogWarning("Cannot convert signal of type " + args.ToString() + " to string");
+                    break;
+            }
+
+            value = result;
+
+            return false;
+        }
+        #endregion
     }
 
-    public class SignalTextArgs 
+    public class SignalStringArgs 
         : SignalArgs
     {
-        public SignalTextArgs() : base(SignalTypes.TEXT) { }
-        public string Text = "Hello World!";
+        public SignalStringArgs() : base(SignalTypes.STRING) { }
+        public string String = "Hello World!";
     };
 
     public class SignalFloatArgs

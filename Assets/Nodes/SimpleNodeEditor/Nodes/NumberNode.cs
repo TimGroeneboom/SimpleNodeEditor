@@ -41,7 +41,7 @@ namespace SimpleNodeEditor
                 SignalFloatArgs floatArgs = new SignalFloatArgs();
                 floatArgs.Value = Value;
 
-                outlet.Emit(new Signal(outlet, floatArgs));
+                outlet.Send(floatArgs);
             }
 
             GUI.EndGroup();

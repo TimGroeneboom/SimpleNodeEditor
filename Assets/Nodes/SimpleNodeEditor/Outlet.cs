@@ -6,7 +6,7 @@ namespace SimpleNodeEditor
     [System.Serializable]
     public class Outlet : Let
     {
-        public SignalHandler Emit = (Signal signal) => { };
+        public event SignalHandler Emit = (Signal signal) => { };
 
         override public void Construct(BaseNode owner)
         {
@@ -34,6 +34,11 @@ namespace SimpleNodeEditor
             Connections.Sort();
         }
 
+        void Start()
+        {
+            MakeConnections();
+        }
+
         public override void RemoveLet(Let letToRemove)
         {
             base.RemoveLet(letToRemove);
@@ -42,11 +47,10 @@ namespace SimpleNodeEditor
 
         public void MakeConnections()
         {
-            // clear signals
-            if (Connections.Count == 0)
-                Emit = (Signal signal) => { };
-            else
+            if (Connections.Count > 0)
                 Emit = null;
+            else
+                Emit = (Signal signal)=>{};
 
             // 
             SortConnections();
@@ -56,6 +60,11 @@ namespace SimpleNodeEditor
             {
                 Emit += ((Inlet)Connections[i]).Slot;
             }
+        }
+
+        public void Send(SignalArgs args)
+        {
+            Emit(new Signal(this, args));
         }
     }
 }

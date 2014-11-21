@@ -17,7 +17,7 @@ namespace SimpleNodeEditor
 
         void OnInletOneReceivedSignal(Signal signal)
         {
-            outlet1.Emit(signal);
+            outlet1.Send(signal.Args);
 
             Debug.Log("Received signal!");
         }
@@ -73,13 +73,13 @@ namespace SimpleNodeEditor
         [ContextMenu("FireOne")]
         void FireSignalOnOutlet1()
         {
-            outlet1.Emit(new Signal(outlet1, new SignalArgs()));
+            outlet1.Send(new SignalArgs());
         }
 
         [ContextMenu("FireTwo")]
         void FireSignalOnOutlet2()
         {
-            outlet2.Emit(new Signal(outlet2, new SignalArgs()));
+            outlet2.Send( new SignalArgs());
         }
     }
 

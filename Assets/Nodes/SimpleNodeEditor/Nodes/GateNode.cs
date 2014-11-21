@@ -13,39 +13,53 @@ namespace SimpleNodeEditor
         [SerializeField]
         Outlet outlet = null;
         [SerializeField]
-        Inlet inlet = null;
+        Inlet inlet1 = null;
+        [SerializeField]
+        Inlet inlet2 = null;
 
         public bool Value = false;
 
-        void OnSignalReceived(Signal signal)
+        void OnInlet1Received(Signal signal)
         {
             if(Value)
             {
-                outlet.Emit(signal);
+                outlet.Send(signal.Args);
             }
+        }
+
+        void OnInlet2Received(Signal signal)
+        {
+            bool val = false;
+            if (Signal.TryParseBool(signal.Args, out val))
+            {
+                Value = val;
+            }  
         }
 
         protected override void Inited()
         {
-            inlet.SlotReceivedSignal += OnSignalReceived;
+            inlet1.SlotReceivedSignal += OnInlet1Received;
+            inlet2.SlotReceivedSignal += OnInlet2Received;
         }
 
         public override void Construct()
         {
             Name = "GateNode";
 
-            inlet = (Inlet)MakeLet(LetTypes.INLET);
-            
-            outlet = (Outlet)MakeLet(LetTypes.OUTLET);
-            outlet.yOffset = 25;
+            inlet1 = (Inlet)MakeLet(LetTypes.INLET);
+            inlet2 = (Inlet)MakeLet(LetTypes.INLET);
+            inlet2.yOffset = 25;
 
-            Size = new Vector2(Size.x, 100);
+            outlet = (Outlet)MakeLet(LetTypes.OUTLET);
+            outlet.yOffset = 50;
+
+            Size = new Vector2(Size.x, 125);
         }
 
 #if UNITY_EDITOR
         public override void WindowCallback(int id)
         {
-            GUI.BeginGroup(new Rect(5, 50, 100, 50));
+            GUI.BeginGroup(new Rect(5, 75, 100, 50));
             EditorGUIUtility.LookLikeControls(30, 30);
 
             Value = GUILayout.Toggle(Value, "Is open");

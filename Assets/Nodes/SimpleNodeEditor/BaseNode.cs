@@ -101,15 +101,6 @@ namespace SimpleNodeEditor
 
         void Start()
         {
-            for (int i = 0; i < m_lets.Count; i++)
-            {
-                if(m_lets[i].Type == LetTypes.OUTLET)
-                {
-                    Outlet outlet = (Outlet)m_lets[i];
-                    outlet.MakeConnections();
-                }
-            }
-
             Inited();
         }
 
@@ -133,7 +124,7 @@ namespace SimpleNodeEditor
                             Inlet inlet = m_lets[i] as Inlet;
                             for (int j = 0; j < inlet.Connections.Count; j++ )
                             {
-                                ((Outlet)inlet.Connections[i]).MakeConnections();
+                                ((Outlet)inlet.Connections[j]).MakeConnections();
                             }
                             break;
                         case LetTypes.OUTLET:
