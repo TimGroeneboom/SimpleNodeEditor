@@ -59,6 +59,4 @@ namespace SimpleNodeEditor
         }
 #endif
     }
-
-
 }
