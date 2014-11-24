@@ -82,6 +82,17 @@ namespace SimpleNodeEditor
                 }
             }
 
+            if( m_nodegraphStack.Count > 0 )
+            {
+                NodeGraph nodeGraph = Root.GetComponent<NodeGraph>();
+                nodeGraph.ShowLets();
+
+            }else
+            {
+                NodeGraph nodeGraph = Root.GetComponent<NodeGraph>();
+                nodeGraph.HideLets();
+            }
+
             Repaint();
         }
 

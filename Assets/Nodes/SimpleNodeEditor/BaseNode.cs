@@ -8,6 +8,8 @@ namespace SimpleNodeEditor
     public abstract class BaseNode 
         : MonoBehaviour
     {
+        public bool Visible = true;
+
         [SerializeField]
         protected Rect m_rect;
         public Rect Rect { get { return m_rect; } }
@@ -103,6 +105,9 @@ namespace SimpleNodeEditor
 #if UNITY_EDITOR
         public void Draw()
         {
+            if (!Visible)
+                return;
+
             m_rect = GUI.Window(Id, m_rect, WindowCallback, gameObject.name);
 
             Vector2 newPos = new Vector2(m_rect.x, m_rect.y);
@@ -144,6 +149,9 @@ namespace SimpleNodeEditor
 
         public virtual bool MouseOver(Vector2 mousePos)
         {
+            if (!Visible)
+                return false;
+
             bool handled = false;
             for (int i = 0; i < m_lets.Count; i++)
             {
@@ -159,6 +167,9 @@ namespace SimpleNodeEditor
 
         public virtual bool MouseDrag(Vector2 mousePos)
         {
+            if (!Visible)
+                return false;
+            
             bool handled = false;
             for (int i = 0; i < m_lets.Count; i++)
             {
@@ -174,6 +185,10 @@ namespace SimpleNodeEditor
 
         public virtual bool MouseDown(Vector2 mousePos, int button)
         {
+            if (!Visible)
+                return false;
+
+
             bool handled = false;
             for (int i = 0; i < m_lets.Count; i++)
             {
@@ -195,6 +210,9 @@ namespace SimpleNodeEditor
 
         public virtual bool MouseUp(Vector2 mousePos)
         {
+            if (!Visible)
+                return false;
+
             bool handled = false;
             for (int i = 0; i < m_lets.Count; i++)
             {
@@ -210,6 +228,9 @@ namespace SimpleNodeEditor
 
         public virtual void WindowCallback(int id)
         {
+            if (!Visible)
+                return;
+
             GUI.DragWindow();
 
             for (int i = 0; i < m_lets.Count; i++)

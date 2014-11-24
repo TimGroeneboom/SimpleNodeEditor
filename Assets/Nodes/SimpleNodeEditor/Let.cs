@@ -23,6 +23,8 @@ namespace SimpleNodeEditor
     public abstract class Let 
         : MonoBehaviour, IComparable<Let>
     {
+        public bool Visible = true;
+
         [SerializeField]
         protected BaseNode m_owner = null;
         public BaseNode Owner { get { return m_owner; } set { m_owner = value; } }
@@ -96,6 +98,9 @@ namespace SimpleNodeEditor
 #if UNITY_EDITOR
         public virtual void DrawLet(Rect position)
         {
+            if (!Visible)
+                return;
+
             Position = new Rect(position.x + Offset.x, position.y + Offset.y + yOffset, Offset.width, Offset.height);
             GUI.Box(Position, "");
         }
@@ -103,7 +108,9 @@ namespace SimpleNodeEditor
         private GenericMenu m_genericMenu = null;
         public virtual bool MouseOver(Vector2 mousePos)
         {
-            
+            if (!Visible)
+                return false;
+
             if (mousePos.x > Position.x - m_hitArea.x && mousePos.x < Position.x + Position.width + m_hitArea.x &&
                 mousePos.y > Position.y - m_hitArea.y && mousePos.y < Position.y + Position.height + m_hitArea.y)
             {
@@ -115,6 +122,9 @@ namespace SimpleNodeEditor
 
         public virtual bool MouseDrag(Vector2 mousePos)
         {
+            if (!Visible)
+                return false;
+
             if (mousePos.x > Position.x - m_hitArea.x && mousePos.x < Position.x + Position.width + m_hitArea.x &&
                 mousePos.y > Position.y - m_hitArea.y && mousePos.y < Position.y + Position.height + m_hitArea.y)
             {
@@ -127,6 +137,9 @@ namespace SimpleNodeEditor
 
         public virtual bool MouseDown(Vector2 mousePos, int button)
         {
+            if (!Visible)
+                return false;
+
             if (mousePos.x > Position.x - m_hitArea.x && mousePos.x < Position.x + Position.width + m_hitArea.x &&
                 mousePos.y > Position.y - m_hitArea.y && mousePos.y < Position.y + Position.height + m_hitArea.y)
             {
@@ -150,6 +163,9 @@ namespace SimpleNodeEditor
 
         public virtual bool MouseUp(Vector2 mousePos)
         {
+            if (!Visible)
+                return false;
+
             if (mousePos.x > Position.x - m_hitArea.x && mousePos.x < Position.x + Position.width + m_hitArea.x &&
                 mousePos.y > Position.y - m_hitArea.y && mousePos.y < Position.y + Position.height + m_hitArea.y)
             {
@@ -162,6 +178,9 @@ namespace SimpleNodeEditor
 
         public virtual void DrawLabel()
         {
+            if (!Visible)
+                return;
+
             GUI.Label(new Rect(10, 20 + yOffset, 80, 20), Name);
         }
 #endif

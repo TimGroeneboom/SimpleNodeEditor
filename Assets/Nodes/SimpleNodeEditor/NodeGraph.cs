@@ -67,13 +67,21 @@ namespace SimpleNodeEditor
                 MasterInlet.transform.parent = transform;
                 MasterInlet.ShowCloseButton = false;
                 MasterInlet.Construct();
+                MasterInlet.Name = "Graph Inlet";
+
+                MasterInlet.Inlet.Visible = false;
 
                 GameObject masterOutletObject = new GameObject("Graph Outlet");
                 MasterOutlet = masterOutletObject.AddComponent<PassThruNode>();
                 MasterOutlet.Position = new Vector2(500, 500);
                 MasterOutlet.transform.parent = transform;
                 MasterOutlet.ShowCloseButton = false;
+                
+
                 MasterOutlet.Construct();
+                MasterOutlet.Name = "Graph Outlet";
+
+                MasterOutlet.Outlet.Visible = false;
             }
 
         }
@@ -82,6 +90,18 @@ namespace SimpleNodeEditor
         {
             m_inlet.SlotReceivedSignal += OnInletReceived;
             MasterOutlet.OnSignalReceived += OnMasterOutletReceivedSignal;
+        }
+
+        public void HideLets()
+        {
+            MasterInlet.Visible = false;
+            MasterOutlet.Visible = false;
+        }
+
+        public void ShowLets()
+        {
+            MasterInlet.Visible = true;
+            MasterOutlet.Visible = true;
         }
 
 #if UNITY_EDITOR

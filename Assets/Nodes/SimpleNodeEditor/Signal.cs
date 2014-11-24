@@ -101,7 +101,7 @@ namespace SimpleNodeEditor
                     }
                     else
                     {
-                        Debug.LogWarning("Cannot convert " + ((SignalStringArgs)args).Value + "to int");
+                        Debug.LogWarning("Cannot convert " + ((SignalStringArgs)args).Value + " to int");
                     }
                     break;
                 default:
