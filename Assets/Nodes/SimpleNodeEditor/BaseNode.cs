@@ -13,6 +13,8 @@ namespace SimpleNodeEditor
         public Rect Rect { get { return m_rect; } }
         public int Id = 0;
 
+        public bool ShowCloseButton = true;
+
         private string m_name = "Node";
         public string Name
         {
@@ -78,23 +80,14 @@ namespace SimpleNodeEditor
         [SerializeField]
         protected Rect m_closeBoxPos = new Rect(10, -20, 10, 20);
 
-        protected Let MakeLet(LetTypes type)
+        protected T MakeLet <T> (string name = "Let", int yOffset = 0) where T : Let
         {
-            Let let = null;
-
-            switch(type)
-            {
-                case LetTypes.INLET:
-                    let = gameObject.AddComponent<Inlet>();
-                    break;
-                case LetTypes.OUTLET:
-                    let = gameObject.AddComponent<Outlet>();
-                    break;
-            }
-
+            T let = gameObject.AddComponent<T>();
             let.Construct(this);
-
             m_lets.Add(let);
+
+            let.Name = name;
+            let.yOffset = yOffset;
 
             return let;
         }
@@ -145,7 +138,8 @@ namespace SimpleNodeEditor
             }
 
             // draw close box
-            GUI.Box(m_closeBoxPos, "X");
+            if( ShowCloseButton )
+                GUI.Box(m_closeBoxPos, "X");
         }
 
         public virtual bool MouseOver(Vector2 mousePos)
@@ -191,7 +185,7 @@ namespace SimpleNodeEditor
             }
 
             // check if mouse is on close box if mouseevent is not handled by Input
-            if (!handled && m_closeBoxPos.Contains(mousePos))
+            if (!handled && m_closeBoxPos.Contains(mousePos) && ShowCloseButton)
             {
                 m_valid = false;
             }

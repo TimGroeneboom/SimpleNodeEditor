@@ -31,9 +31,8 @@ namespace SimpleNodeEditor
         {
             Name = "ButtonNode";
 
-            inlet = (Inlet)MakeLet(LetTypes.INLET);
-            outlet = (Outlet)MakeLet(LetTypes.OUTLET);
-            outlet.yOffset = 25;
+            inlet = MakeLet<Inlet>("Input");
+            outlet = MakeLet<Outlet>("Output", 25);
             Size = new Vector2(Size.x, 100);
         }
 

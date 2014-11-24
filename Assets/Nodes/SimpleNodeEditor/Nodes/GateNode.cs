@@ -11,11 +11,11 @@ namespace SimpleNodeEditor
     public class GateNode : BaseNode
     {
         [SerializeField]
-        Outlet outlet = null;
+        Outlet m_outlet = null;
         [SerializeField]
-        Inlet inlet1 = null;
+        Inlet m_inlet1 = null;
         [SerializeField]
-        Inlet inlet2 = null;
+        Inlet m_inlet2 = null;
 
         public bool Value = false;
 
@@ -23,7 +23,7 @@ namespace SimpleNodeEditor
         {
             if(Value)
             {
-                outlet.Send(signal.Args);
+                m_outlet.Send(signal.Args);
             }
         }
 
@@ -38,20 +38,17 @@ namespace SimpleNodeEditor
 
         protected override void Inited()
         {
-            inlet1.SlotReceivedSignal += OnInlet1Received;
-            inlet2.SlotReceivedSignal += OnInlet2Received;
+            m_inlet1.SlotReceivedSignal += OnInlet1Received;
+            m_inlet2.SlotReceivedSignal += OnInlet2Received;
         }
 
         public override void Construct()
         {
             Name = "GateNode";
 
-            inlet1 = (Inlet)MakeLet(LetTypes.INLET);
-            inlet2 = (Inlet)MakeLet(LetTypes.INLET);
-            inlet2.yOffset = 25;
-
-            outlet = (Outlet)MakeLet(LetTypes.OUTLET);
-            outlet.yOffset = 50;
+            m_inlet1 = MakeLet<Inlet>("Inlet 1");
+            m_inlet2 = MakeLet<Inlet>("Inlet 2", 25);
+            m_outlet = MakeLet<Outlet>("Outlet", 50);
 
             Size = new Vector2(Size.x, 125);
         }

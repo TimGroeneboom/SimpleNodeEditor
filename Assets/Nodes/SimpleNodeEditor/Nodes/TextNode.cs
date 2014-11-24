@@ -56,16 +56,9 @@ namespace SimpleNodeEditor
         {
             Name = "TextNode";
 
-            inlet = (Inlet)MakeLet(LetTypes.INLET);
-            inlet.Name = "Trigger";
-
-            setter = (Inlet)MakeLet(LetTypes.INLET);
-            setter.yOffset = 25;
-            setter.Name = "Set";
-
-            outlet = (Outlet)MakeLet(LetTypes.OUTLET);
-            outlet.yOffset = 50;
-            outlet.Name = "Output";
+            inlet = MakeLet<Inlet>("Trigger");
+            setter = MakeLet<Inlet>("Set", 25);
+            outlet = MakeLet<Outlet>("Output", 50);
 
             Size = new Vector2(200, 125);
         }

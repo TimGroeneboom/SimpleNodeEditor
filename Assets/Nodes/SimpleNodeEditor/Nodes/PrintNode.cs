@@ -14,29 +14,26 @@ namespace SimpleNodeEditor
         Inlet trigger = null;
 
         [SerializeField]
-        Inlet input = null;
+        Inlet m_input = null;
 
         [SerializeField]
-        Inlet setter = null;
+        Inlet m_setter = null;
 
         public string Value = "Hello World!";
 
         protected override void Inited()
         {
-            input.SlotReceivedSignal += OnInputReceived;
+            m_input.SlotReceivedSignal += OnInputReceived;
         }
 
         public override void Construct()
         {
             Name = "PrintNode";
 
-            input = (Inlet)MakeLet(LetTypes.INLET);
-            input.Name = "Input";
+            m_input = MakeLet<Inlet>("Input");
+            m_setter = MakeLet<Inlet>("Setter", 25);
 
-            setter = (Inlet)MakeLet(LetTypes.INLET);
-            setter.Name = "Setter";
-
-            Size = new Vector2(200, 75);
+            Size = new Vector2(200, 100);
         }
 
         void OnInputReceived(Signal signal)
@@ -59,7 +56,7 @@ namespace SimpleNodeEditor
 #if UNITY_EDITOR
         public override void WindowCallback(int id)
         {
-            GUI.BeginGroup(new Rect(5, 25, 200, 50));
+            GUI.BeginGroup(new Rect(5, 50, 200, 50));
 
             Value = GUILayout.TextField(Value, GUILayout.MaxWidth(180));
 

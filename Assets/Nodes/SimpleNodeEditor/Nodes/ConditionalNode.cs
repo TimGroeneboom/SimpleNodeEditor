@@ -18,9 +18,9 @@ namespace SimpleNodeEditor
     public class ConditionalNode : BaseNode
     {
         [SerializeField]
-        Outlet outlet = null;
+        Outlet m_outlet = null;
         [SerializeField]
-        Inlet inlet = null;
+        Inlet m_inlet = null;
 
         public float Value = 0.0f;
         public Conditions Condition = Conditions.GREATER;
@@ -35,7 +35,7 @@ namespace SimpleNodeEditor
                     SignalFloatArgs signalArgs = signal.Args as SignalFloatArgs;
                     if(signalArgs.Value > Value)
                     {
-                        outlet.Send(signal.Args);
+                        m_outlet.Send(signal.Args);
                     }
                     break;
                 case SignalTypes.STRING:
@@ -45,7 +45,7 @@ namespace SimpleNodeEditor
                     {
                         if(result > Value)
                         {
-                            outlet.Send(signal.Args);
+                            m_outlet.Send(signal.Args);
                         }
                     }
                     break;
@@ -54,16 +54,15 @@ namespace SimpleNodeEditor
 
         protected override void Inited()
         {
-            inlet.SlotReceivedSignal += OnInputReceived;
+            m_inlet.SlotReceivedSignal += OnInputReceived;
         }
 
         public override void Construct()
         {
             Name = "ConditionalNode";
-            
-            inlet = (Inlet)MakeLet(LetTypes.INLET);
-            outlet = (Outlet)MakeLet(LetTypes.OUTLET);
-            outlet.yOffset = 25;
+
+            m_inlet = MakeLet<Inlet>("Inlet");
+            m_outlet = MakeLet<Outlet>("Outlet", 25);
 
             Size = new Vector2(125, 125);
         }

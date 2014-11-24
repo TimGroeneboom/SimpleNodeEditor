@@ -44,9 +44,9 @@ namespace SimpleNodeEditor
         {
             Name = "RandomIntNode";
 
-            inlet = (Inlet)MakeLet(LetTypes.INLET);
+            inlet = MakeLet<Inlet>();
 
-            outlet = (Outlet)MakeLet(LetTypes.OUTLET);
+            outlet = MakeLet<Outlet>();
             outlet.yOffset = 25;
 
             Size = new Vector2(125, 100);

@@ -50,6 +50,8 @@ namespace SimpleNodeEditor
         public abstract void Construct(BaseNode owner);
         public abstract void Construct(BaseNode owner, Rect offset);
 
+        public string HelpText = "This is a let.";
+
         public int CompareTo(Let compareLet)
         {
             // A null value means that this object is greater. 
@@ -98,8 +100,10 @@ namespace SimpleNodeEditor
             GUI.Box(Position, "");
         }
 
+        private GenericMenu m_genericMenu = null;
         public virtual bool MouseOver(Vector2 mousePos)
         {
+            
             if (mousePos.x > Position.x - m_hitArea.x && mousePos.x < Position.x + Position.width + m_hitArea.x &&
                 mousePos.y > Position.y - m_hitArea.y && mousePos.y < Position.y + Position.height + m_hitArea.y)
             {

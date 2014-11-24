@@ -12,14 +12,25 @@ namespace SimpleNodeEditor
             base.OnInspectorGUI();
 
             NodeGraph myTarget = (NodeGraph)target;
-
             if( GUILayout.Button("Show Graph") )
             {
-                NodeEditor nodeEditor = (NodeEditor)EditorWindow.GetWindow(typeof(NodeEditor));
-                nodeEditor.ConnectionColor = myTarget.ConnectionColor;
-                nodeEditor.Root = myTarget.gameObject;
-                nodeEditor.Show();
+                ShowGraph(myTarget);
             }
+        }
+
+        public void OnShowGraphClicked()
+        {
+
+        }
+
+        public void ShowGraph(NodeGraph sender)
+        {
+            NodeEditor nodeEditor = (NodeEditor) EditorWindow.GetWindow(typeof(NodeEditor));
+            nodeEditor.ConnectionColor = sender.ConnectionColor;
+            nodeEditor.Root = sender.gameObject;
+            nodeEditor.MasterInlet = sender.Inlet;
+            nodeEditor.MasterOutlet = sender.Outlet;
+            nodeEditor.Show();
         }
     }
 }

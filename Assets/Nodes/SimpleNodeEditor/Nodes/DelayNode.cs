@@ -20,10 +20,10 @@ namespace SimpleNodeEditor
         public float Delay = 1.0f;
 
         [SerializeField]
-        Inlet inlet = null;
+        Inlet m_inlet = null;
 
         [SerializeField]
-        Outlet outlet = null;
+        Outlet m_outlet = null;
 
         List<DelayedSignal> m_delayedSignals = new List<DelayedSignal>();
         List<DelayedSignal> m_signalsToAdd = new List<DelayedSignal>();
@@ -38,17 +38,15 @@ namespace SimpleNodeEditor
 
         protected override void Inited()
         {
-            inlet.SlotReceivedSignal += OnInlet;
+            m_inlet.SlotReceivedSignal += OnInlet;
         }
 
         public override void Construct()
         {
             Name = "DelayNode";
 
-            inlet = (Inlet) MakeLet(LetTypes.INLET);
-
-            outlet = (Outlet) MakeLet(LetTypes.OUTLET);
-            outlet.yOffset = 25;
+            m_inlet = MakeLet<Inlet>("Inlet");
+            m_outlet = MakeLet<Outlet>("Outlet", 25);
 
             Size = new Vector2(125, Size.y);
         }
@@ -84,7 +82,7 @@ namespace SimpleNodeEditor
                     delayedSignal.RunningTime += Time.deltaTime;
                     if (delayedSignal.RunningTime > Delay)
                     {
-                        outlet.Send(delayedSignal.Signal.Args);
+                        m_outlet.Send(delayedSignal.Signal.Args);
 
                         if (SignalsToRemove == null)
                             SignalsToRemove = new List<DelayedSignal>();

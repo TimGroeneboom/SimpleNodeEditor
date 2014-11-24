@@ -30,6 +30,23 @@ namespace SimpleNodeEditor
                 return m_root;
             }
         }
+        public List<NodeGraph> m_nodegraphStack = new List<NodeGraph>();
+
+        public Inlet MasterInlet = null;
+        public Outlet MasterOutlet = null;
+
+        public void GoBack()
+        {
+            NodeGraph newRoot = m_nodegraphStack[m_nodegraphStack.Count - 1];
+            m_nodegraphStack.Remove(newRoot);
+            Root = newRoot.gameObject;
+        }
+
+        public void OnShowGraphNodeClicked( NodeGraph nodeGraph )
+        {
+            m_nodegraphStack.Add(Root.GetComponent<NodeGraph>());
+            Root = nodeGraph.gameObject;
+        }
 
         public void Construct()
         {
@@ -55,6 +72,13 @@ namespace SimpleNodeEditor
                     }
 
                     NodeID++;
+                }
+
+                NodeGraph nodeGraph = node as NodeGraph;
+                if( nodeGraph != null )
+                {
+                    nodeGraph.ShowNodeGraphClicked -= OnShowGraphNodeClicked;
+                    nodeGraph.ShowNodeGraphClicked += OnShowGraphNodeClicked;
                 }
             }
 
@@ -217,12 +241,25 @@ namespace SimpleNodeEditor
 
         void OnGUI()
         {
+            if (m_nodegraphStack.Count > 0 )
+            {
+                if(GUI.Button(new Rect(10, 10, 200, 50), "Back"))
+                {
+                    // Pop nodegraph stack
+                    GoBack();
+
+                    return;
+                }
+            }
+
             BeginWindows();
 
             for (int i = 0; i < m_nodes.Count; i++)
             {
                 m_nodes[i].Draw();
             }
+
+            EndWindows();
 
             bool connectionSelected = false;
             Outlet outletSelected = null;
@@ -257,6 +294,7 @@ namespace SimpleNodeEditor
                     if( m_nodes[i].MouseOver(Event.current.mousePosition) )
                     {
                         handled = true;
+
                         break;
                     }
                 }
@@ -335,8 +373,6 @@ namespace SimpleNodeEditor
                 DrawConnectingCurve(m_startMousePos, Event.current.mousePosition);
                 Repaint();
             }
-
-            EndWindows();
 
             List<BaseNode> nodesToDelete = new List<BaseNode>();
             foreach (BaseNode node in m_nodes)

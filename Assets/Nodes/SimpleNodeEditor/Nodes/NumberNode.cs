@@ -11,19 +11,19 @@ namespace SimpleNodeEditor
     public class NumberNode : BaseNode
     {
         [SerializeField]
-        Inlet inlet = null;
+        Inlet m_trigger = null;
         [SerializeField]
-        Inlet setter = null;
+        Inlet m_setter = null;
 
         [SerializeField]
-        Outlet outlet = null;
+        Outlet m_outlet = null;
 
         public float Value = 0.0f;
 
         protected override void Inited()
         {
-            inlet.SlotReceivedSignal += OnInletReceived;
-            setter.SlotReceivedSignal += OnSetterReceived;
+            m_trigger.SlotReceivedSignal += OnInletReceived;
+            m_setter.SlotReceivedSignal += OnSetterReceived;
         }
 
         void OnInletReceived(Signal signal)
@@ -33,7 +33,7 @@ namespace SimpleNodeEditor
                 Value = ((SignalFloatArgs)signal.Args).Value;
             }
 
-            outlet.Send(new SignalFloatArgs(Value));
+            m_outlet.Send(new SignalFloatArgs(Value));
         }
 
         void OnSetterReceived(Signal signal)
@@ -55,15 +55,9 @@ namespace SimpleNodeEditor
         {
             Name = "NumberNode";
 
-            inlet = (Inlet)MakeLet(LetTypes.INLET);
-            inlet.Name = "Trigger";
-
-            setter = (Inlet)MakeLet(LetTypes.INLET);
-            setter.yOffset = 25;
-            setter.Name = "Set";
-
-            outlet = (Outlet)MakeLet(LetTypes.OUTLET);
-            outlet.yOffset = 50;
+            m_trigger = MakeLet<Inlet>("Trigger");
+            m_setter = MakeLet<Inlet>("Set", 25);
+            m_outlet = MakeLet<Outlet>("Outlet", 50);
 
             Size = new Vector2(Size.x, 125);
         }
