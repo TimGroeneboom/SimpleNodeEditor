@@ -94,6 +94,12 @@ namespace SimpleNodeEditor
             return let;
         }
 
+        protected void DestroyLet(Let let)
+        {
+            m_lets.Remove(let);
+            DestroyImmediate(let);
+        }
+
         void Start()
         {
             Inited();

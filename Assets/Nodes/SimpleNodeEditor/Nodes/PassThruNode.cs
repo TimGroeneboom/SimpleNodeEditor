@@ -9,6 +9,7 @@ namespace SimpleNodeEditor
 {
     public delegate void PassThuSignalReceivedEventHandler(Signal signal);
 
+    [NodeMenuItem("PassThruNode", typeof(PassThruNode))]
     public class PassThruNode
         : BaseNode
     {

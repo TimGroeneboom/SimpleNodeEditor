@@ -27,29 +27,31 @@ namespace SimpleNodeEditor
 
         void OnInputReceived(Signal signal)
         {
-            switch(signal.Args.Type)
+            float val = 0.0f;
+            if(Signal.TryParseFloat(signal.Args, out val))
             {
-                case SignalTypes.BANG:
-                    break;
-                case SignalTypes.FLOAT:
-                    SignalFloatArgs signalArgs = signal.Args as SignalFloatArgs;
-                    if(signalArgs.Value > Value)
-                    {
-                        m_outlet.Send(signal.Args);
-                    }
-                    break;
-                case SignalTypes.STRING:
-                    SignalStringArgs signalTextArgs = signal.Args as SignalStringArgs;
-                    float result = 0.0f;
-                    if(float.TryParse(signalTextArgs.Value, out result))
-                    {
-                        if(result > Value)
-                        {
-                            m_outlet.Send(signal.Args);
-                        }
-                    }
-                    break;
+                switch (Condition)
+                {
+                    case Conditions.GREATER:
+                        if (val > Value)
+                            GenerateBang();
+                        break;
+                    case Conditions.LESSER:
+                        if (val < Value)
+                            GenerateBang();
+                        break;
+                    case Conditions.EQUAL:
+                        if (val == Value)
+                            GenerateBang();
+                        break;
+                }
             }
+
+        }
+
+        void GenerateBang()
+        {
+            m_outlet.Send(new SignalArgs());
         }
 
         protected override void Inited()

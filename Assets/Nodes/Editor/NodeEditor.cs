@@ -334,10 +334,9 @@ namespace SimpleNodeEditor
                 if( !handled )
                 {
                     // Do something
-                }else
-                {
-                    Repaint();
                 }
+
+                Repaint();
             }
             else if (Event.current.type == EventType.MouseDown && m_currentMouseMode != MouseModes.CONNECTING)
             {
