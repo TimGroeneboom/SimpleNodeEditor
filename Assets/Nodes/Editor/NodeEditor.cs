@@ -135,10 +135,6 @@ namespace SimpleNodeEditor
             }
         }
 
-        void OnBreakAllConnections(object sender, LetTypes type)
-        {
-        }
-
         void OnLetUp(object sender, LetTypes type)
         {
             if (sender != m_currentSelectedLet)
@@ -275,7 +271,11 @@ namespace SimpleNodeEditor
             bool connectionSelected = false;
             Outlet outletSelected = null;
             Inlet inletSelected = null;
+            float minDistance = float.MaxValue;
 
+            // Collect lines
+            List<Vector4> lines = new List<Vector4>();
+            int selectedLine = -1;
             for (int i = 0; i < m_nodes.Count; i++)
             {
                 for (int j = 0; j < m_nodes[i].Lets.Count; j++)
@@ -285,18 +285,39 @@ namespace SimpleNodeEditor
                     {
                         for (int k = 0; k < outlet.Connections.Count; k++)
                         {
-                            if (DrawConnection(outlet.Connections[k].Position.center, outlet.Position.center, ConnectionColor))
+                            float distance = MouseDistanceToLine(outlet.Connections[k].Position.center, outlet.Position.center);
+                            lines.Add(new Vector4(outlet.Connections[k].Position.center.x, outlet.Connections[k].Position.center.y, outlet.Position.center.x, outlet.Position.y));
+                            if (distance < 20.0f)
                             {
-                                connectionSelected = true;
-                                outletSelected = (Outlet)outlet;
-                                inletSelected = (Inlet)outlet.Connections[k];
-                                break;
+                                if (distance < minDistance)
+                                {
+                                    minDistance = distance;
+                                    connectionSelected = true;
+                                    outletSelected = (Outlet)outlet;
+                                    inletSelected = (Inlet)outlet.Connections[k];
+                                    selectedLine = lines.Count-1;
+                                }
                             }
                         }
                     }
                 }
             }
 
+            // Draw lines 
+            for(int i = 0;i < lines.Count; i++)
+            {
+                Vector4 l = lines[i];
+                if(i!=selectedLine)
+                {
+                    
+                    DrawConnection(new Vector2(l.x, l.y), new Vector2(l.z, l.w), ConnectionColor);
+                }else
+                {
+                    DrawConnection(new Vector2(l.x, l.y), new Vector2(l.z, l.w), Color.blue);
+                }
+            }
+
+            // Process events
             if (Event.current.type == EventType.MouseMove)
             {
                 bool handled = false;
@@ -312,10 +333,11 @@ namespace SimpleNodeEditor
 
                 if( !handled )
                 {
-
+                    // Do something
+                }else
+                {
+                    Repaint();
                 }
-
-                Repaint();
             }
             else if (Event.current.type == EventType.MouseDown && m_currentMouseMode != MouseModes.CONNECTING)
             {
@@ -421,33 +443,17 @@ namespace SimpleNodeEditor
             }
         }
 
-        bool DrawConnection(Vector2 start, Vector2 end, Color color)
+        float MouseDistanceToLine(Vector2 start, Vector2 end )
         {
-            bool mouseOver = false;
+            return DistancePointLine(Event.current.mousePosition, start, end);
+        }
 
-            // check if cursor intersects line segment
-            if (DistancePointLine(Event.current.mousePosition, start, end) < 20.0f)
-            {
-                color = Color.blue;
-                mouseOver = true;
-            }
-
-            /*
-            Vector3 startPos = new Vector3(start.x, start.y, 0);
-            Vector3 endPos = new Vector3(end.x, end.y, 0);
-
-            Vector3 startTan = startPos + Vector3.left * 50;
-            Vector3 endTan = endPos + Vector3.right * 50;
-
-            Handles.DrawBezier(startPos, endPos, startTan, endTan, color, null, 2);
-            */
-
+        void DrawConnection(Vector2 start, Vector2 end, Color color)
+        {
             Color guiColor = Handles.color;
             Handles.color = color;
             Handles.DrawLine(start, end);
             GUI.color = guiColor;
-
-            return mouseOver;
         }
 
         void DrawConnectingCurve(Vector2 start, Vector2 end)
