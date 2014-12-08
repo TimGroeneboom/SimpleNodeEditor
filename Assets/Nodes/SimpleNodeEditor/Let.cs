@@ -21,7 +21,7 @@ namespace SimpleNodeEditor
 
     [System.Serializable]
     public abstract class Let 
-        : MonoBehaviour, IComparable<Let>
+        : MonoBehaviour
     {
         public bool Visible = true;
 
@@ -43,7 +43,7 @@ namespace SimpleNodeEditor
         public LetEventHandler LetDrag = (object sender, LetTypes type) => { };
         public LetEventHandler LetUp = (object sender, LetTypes type) => { };
 
-        public List<Let> Connections = new List<Let>();
+        public List<Connection> Connections = new List<Connection>();
 
         [SerializeField]
         protected LetTypes m_type = LetTypes.UNDEFINED;
@@ -54,19 +54,18 @@ namespace SimpleNodeEditor
 
         public string HelpText = "This is a let.";
 
-        public int CompareTo(Let compareLet)
-        {
-            // A null value means that this object is greater. 
-            if (compareLet == null)
-                return 1;
-
-            else
-                return this.Position.y.CompareTo(compareLet.Position.y);
-        }
 
         public virtual void RemoveLet(Let letToRemove)
         {
-            Connections.Remove(letToRemove);
+            foreach(Connection connection in Connections)
+            {
+                if( connection.Outlet == letToRemove || connection.Inlet == letToRemove)
+                {
+                    Connections.Remove(connection);
+                    break;
+                }
+            }
+            
         }
 
         public void BreakAllConnections()
@@ -75,23 +74,34 @@ namespace SimpleNodeEditor
             {
                 for (int i = 0; i < Connections.Count; i++)
                 {
-                    ((Outlet)Connections[i]).Emit -= ((Inlet)this).Slot;
+                    Connections[i].Outlet.Emit -= ((Inlet)this).Slot;
                 }
             }
             else if (Type == LetTypes.OUTLET)
             {
                 for (int i = 0; i < Connections.Count; i++)
                 {
-                    ((Outlet)this).Emit -= ((Inlet)Connections[i]).Slot;
+                    ((Outlet)this).Emit -= Connections[i].Inlet.Slot;
                 }
             }
 
             for (int i = 0; i < Connections.Count; i++)
             {
-                Connections[i].RemoveLet(this);
+                Connections[i].Outlet.RemoveLet(this);
             }
 
             Connections.Clear();
+        }
+
+        public bool Contains(Let let)
+        {
+            foreach(Connection connection in Connections)
+            {
+                if (connection.Inlet == let || connection.Outlet == let)
+                    return true;
+            }
+
+            return false;
         }
 
         #region NODE_EDITOR_FUCTIONS

@@ -128,7 +128,7 @@ namespace SimpleNodeEditor
                             Inlet inlet = m_lets[i] as Inlet;
                             for (int j = 0; j < inlet.Connections.Count; j++ )
                             {
-                                ((Outlet)inlet.Connections[j]).MakeConnections();
+                                inlet.Connections[j].Outlet.MakeConnections();
                             }
                             break;
                         case LetTypes.OUTLET:

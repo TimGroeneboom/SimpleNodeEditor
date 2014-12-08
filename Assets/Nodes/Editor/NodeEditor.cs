@@ -35,6 +35,8 @@ namespace SimpleNodeEditor
         public Inlet MasterInlet = null;
         public Outlet MasterOutlet = null;
 
+        private List<Vector2> m_livePoints = new List<Vector2>();
+
         public void GoBack()
         {
             NodeGraph newRoot = m_nodegraphStack[m_nodegraphStack.Count - 1];
@@ -159,10 +161,12 @@ namespace SimpleNodeEditor
                             inlet = (Let)sender;
                         }
 
-                        if( !inlet.Connections.Contains(outlet) && !outlet.Connections.Contains(inlet) )
+                        if( !inlet.Contains(outlet) && 
+                            !outlet.Contains(inlet) )
                         {
-                            inlet.Connections.Add(outlet);
-                            outlet.Connections.Add(inlet);
+                            Connection connection = new Connection((Inlet)inlet, (Outlet)outlet, m_livePoints);
+                            inlet.Connections.Add(connection);
+                            outlet.Connections.Add(connection);
 
                             if(Application.isPlaying)
                             {
@@ -173,6 +177,9 @@ namespace SimpleNodeEditor
                         else
                         {
                         }
+
+                        m_livePoints.Clear();
+                        m_currentMouseMode = MouseModes.IDLE;
                     }
                 }
             }
@@ -268,14 +275,13 @@ namespace SimpleNodeEditor
 
             EndWindows();
 
-            bool connectionSelected = false;
-            Outlet outletSelected = null;
-            Inlet inletSelected = null;
+            bool isConnectionSelected = false;
+            Connection connectionSelected = null;
             float minDistance = float.MaxValue;
 
-            // Collect lines
-            List<Vector4> lines = new List<Vector4>();
-            int selectedLine = -1;
+            // Collect connections
+            List<Connection> connections = new List<Connection>();
+            int selectedConnection = -1;
             for (int i = 0; i < m_nodes.Count; i++)
             {
                 for (int j = 0; j < m_nodes[i].Lets.Count; j++)
@@ -285,17 +291,30 @@ namespace SimpleNodeEditor
                     {
                         for (int k = 0; k < outlet.Connections.Count; k++)
                         {
-                            float distance = MouseDistanceToLine(outlet.Connections[k].Position.center, outlet.Position.center);
-                            lines.Add(new Vector4(outlet.Connections[k].Position.center.x, outlet.Connections[k].Position.center.y, outlet.Position.center.x, outlet.Position.y));
-                            if (distance < 20.0f)
+                            Connection connection = outlet.Connections[k];
+                            connections.Add(connection);
+
+                            List<Vector2> points = new List<Vector2>();
+                            points.Add(new Vector2(connection.Inlet.Position.center.x, connection.Inlet.Position.center.y));
+                            for (int l = 0; l < connection.Points.Length; l++)
                             {
-                                if (distance < minDistance)
+                                points.Add(connection.Points[l]);
+                            }
+                            points.Add(new Vector2(connection.Outlet.Position.center.x, connection.Outlet.Position.center.y));
+
+                            for(int l = 0; l < points.Count-1; l++ )
+                            {
+                                float distance = MouseDistanceToLine(points[l], points[l+1]);
+
+                                if (distance < 20.0f)
                                 {
-                                    minDistance = distance;
-                                    connectionSelected = true;
-                                    outletSelected = (Outlet)outlet;
-                                    inletSelected = (Inlet)outlet.Connections[k];
-                                    selectedLine = lines.Count-1;
+                                    if (distance < minDistance)
+                                    {
+                                        minDistance = distance;
+                                        isConnectionSelected = true;
+                                        connectionSelected = connection;
+                                        selectedConnection = connections.Count - 1;
+                                    }
                                 }
                             }
                         }
@@ -303,18 +322,31 @@ namespace SimpleNodeEditor
                 }
             }
 
-            // Draw lines 
-            for(int i = 0;i < lines.Count; i++)
+            // Draw connections 
+            for(int i = 0;i < connections.Count; i++)
             {
-                Vector4 l = lines[i];
-                if(i!=selectedLine)
+                Connection connection = connections[i];
+
+                List<Vector2> points = new List<Vector2>();
+                points.Add(connection.Inlet.Position.center);
+                for (int j = 0; j < connection.Points.Length; j++)
                 {
-                    
-                    DrawConnection(new Vector2(l.x, l.y), new Vector2(l.z, l.w), ConnectionColor);
-                }else
-                {
-                    DrawConnection(new Vector2(l.x, l.y), new Vector2(l.z, l.w), Color.blue);
+                    points.Add(connection.Points[j]);
                 }
+                points.Add(connection.Outlet.Position.center);
+
+                for (int j = 0; j < points.Count-1; j++)
+                {
+                    if (i != selectedConnection)
+                    {
+                        DrawLine(points[j], points[j + 1], ConnectionColor);
+                    }
+                    else
+                    {
+                        DrawLine(points[j], points[j + 1], Color.blue);
+                    }
+                }
+
             }
 
             // Process events
@@ -349,16 +381,28 @@ namespace SimpleNodeEditor
 
                 if (!handled && Event.current.button == 1)
                 {
-                    if (!connectionSelected )
+                    if (!isConnectionSelected )
                     {
                         CreateNodeMenu();
                     }else
                     {
-                        BreakConnectionMenu(inletSelected, outletSelected);
+                        BreakConnectionMenu(connectionSelected.Inlet, connectionSelected.Outlet);
                     }
                 }else if(!handled && Event.current.button == 0)
                 {
                     m_startMousePos = Event.current.mousePosition;
+                }
+            }else if (Event.current.type == EventType.MouseDown && m_currentMouseMode == MouseModes.CONNECTING)
+            {
+                if(Event.current.button == 0)
+                {
+                    m_livePoints.Add(Event.current.mousePosition);
+                    Repaint();
+                }
+                else if (Event.current.button == 1)
+                {
+                    m_currentMouseMode = MouseModes.IDLE;
+                    m_livePoints.Clear();
                 }
             }
             else if (Event.current.type == EventType.MouseDrag)
@@ -396,13 +440,23 @@ namespace SimpleNodeEditor
                 {
                     m_nodes[i].MouseUp(Event.current.mousePosition);
                 }
-
-                m_currentMouseMode = MouseModes.IDLE;
             }
 
             if (m_currentMouseMode == MouseModes.CONNECTING)
             {
-                DrawConnectingCurve(m_startMousePos, Event.current.mousePosition);
+                List<Vector2> points = new List<Vector2>();
+                points.Add(m_startMousePos);
+                for(int i = 0; i < m_livePoints.Count; i++)
+                {
+                    points.Add(m_livePoints[i]);
+                }
+                points.Add(Event.current.mousePosition);
+
+                for (int i = 0; i < points.Count - 1; i++ )
+                {
+                    DrawConnectingCurve(points[i], points[i+1]);
+                }
+                    
                 Repaint();
             }
 
@@ -447,7 +501,7 @@ namespace SimpleNodeEditor
             return DistancePointLine(Event.current.mousePosition, start, end);
         }
 
-        void DrawConnection(Vector2 start, Vector2 end, Color color)
+        void DrawLine(Vector2 start, Vector2 end, Color color)
         {
             Color guiColor = Handles.color;
             Handles.color = color;

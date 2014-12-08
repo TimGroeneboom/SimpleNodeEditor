@@ -58,7 +58,7 @@ namespace SimpleNodeEditor
             // finally connect the slots
             for (int i = 0; i < Connections.Count; i++)
             {
-                Emit += ((Inlet)Connections[i]).Slot;
+                Emit += Connections[i].Inlet.Slot;
             }
         }
 
