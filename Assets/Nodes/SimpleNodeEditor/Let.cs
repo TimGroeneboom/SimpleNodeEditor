@@ -74,7 +74,10 @@ namespace SimpleNodeEditor
             {
                 for (int i = 0; i < Connections.Count; i++)
                 {
-                    Connections[i].Outlet.Emit -= ((Inlet)this).Slot;
+                    Outlet outlet = Connections[i].Outlet;
+
+                    if(outlet!=null)
+                        outlet.Emit -= ((Inlet)this).Slot;
                 }
             }
             else if (Type == LetTypes.OUTLET)
@@ -87,7 +90,10 @@ namespace SimpleNodeEditor
 
             for (int i = 0; i < Connections.Count; i++)
             {
-                Connections[i].Outlet.RemoveLet(this);
+                Outlet outlet = Connections[i].Outlet;
+
+                if (outlet != null)
+                    outlet.RemoveLet(this);
             }
 
             Connections.Clear();
