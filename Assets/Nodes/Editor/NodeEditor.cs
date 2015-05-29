@@ -50,6 +50,11 @@ namespace SimpleNodeEditor
             Root = nodeGraph.gameObject;
         }
 
+        void OnInspectorUpdate()
+        {
+            Repaint();
+        }
+
         public void Construct()
         {
             if (Root == null)
