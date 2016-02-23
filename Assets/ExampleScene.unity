@@ -8,236 +8,114 @@ SceneSettings:
   m_PVSPortalsArray: []
   m_OcclusionBakeSettings:
     smallestOccluder: 5
-    smallestHole: .25
+    smallestHole: 0.25
     backfaceThreshold: 100
 --- !u!104 &2
 RenderSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 6
   m_Fog: 0
-  m_FogColor: {r: .5, g: .5, b: .5, a: 1}
+  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
-  m_FogDensity: .00999999978
+  m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientLight: {r: .200000003, g: .200000003, b: .200000003, a: 1}
-  m_SkyboxMaterial: {fileID: 0}
-  m_HaloStrength: .5
+  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
+  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientIntensity: 1
+  m_AmbientMode: 0
+  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
-  m_SpotCookie: {fileID: 0}
-  m_ObjectHideFlags: 0
---- !u!127 &3
-LevelGameManager:
-  m_ObjectHideFlags: 0
---- !u!157 &4
+  m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
+  m_DefaultReflectionMode: 0
+  m_DefaultReflectionResolution: 128
+  m_ReflectionBounces: 1
+  m_ReflectionIntensity: 1
+  m_CustomReflection: {fileID: 0}
+  m_Sun: {fileID: 0}
+--- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  m_LightProbes: {fileID: 0}
-  m_Lightmaps: []
+  serializedVersion: 6
+  m_GIWorkflowMode: 0
   m_LightmapsMode: 1
-  m_BakedColorSpace: 0
-  m_UseDualLightmapsInForward: 0
+  m_GISettings:
+    serializedVersion: 2
+    m_BounceScale: 1
+    m_IndirectOutputScale: 1
+    m_AlbedoBoost: 1
+    m_TemporalCoherenceThreshold: 1
+    m_EnvironmentLightingMode: 0
+    m_EnableBakedLightmaps: 1
+    m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
-    m_Resolution: 50
-    m_LastUsedResolution: 0
+    serializedVersion: 3
+    m_Resolution: 2
+    m_BakeResolution: 40
     m_TextureWidth: 1024
     m_TextureHeight: 1024
-    m_BounceBoost: 1
-    m_BounceIntensity: 1
-    m_SkyLightColor: {r: .860000014, g: .930000007, b: 1, a: 1}
-    m_SkyLightIntensity: 0
-    m_Quality: 0
-    m_Bounces: 1
-    m_FinalGatherRays: 1000
-    m_FinalGatherContrastThreshold: .0500000007
-    m_FinalGatherGradientThreshold: 0
-    m_FinalGatherInterpolationPoints: 15
-    m_AOAmount: 0
-    m_AOMaxDistance: .100000001
-    m_AOContrast: 1
-    m_LODSurfaceMappingDistance: 1
-    m_Padding: 0
-    m_TextureCompression: 0
-    m_LockAtlas: 0
---- !u!196 &5
+    m_AOMaxDistance: 1
+    m_Padding: 2
+    m_CompAOExponent: 0
+    m_LightmapParameters: {fileID: 0}
+    m_TextureCompression: 1
+    m_FinalGather: 0
+    m_FinalGatherRayCount: 1024
+    m_ReflectionCompression: 2
+  m_LightingDataAsset: {fileID: 0}
+  m_RuntimeCPUUsage: 25
+--- !u!196 &4
 NavMeshSettings:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_BuildSettings:
-    agentRadius: .5
+    serializedVersion: 2
+    agentRadius: 0.5
     agentHeight: 2
     agentSlope: 45
-    agentClimb: .400000006
+    agentClimb: 0.4
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     accuratePlacement: 0
     minRegionArea: 2
-    widthInaccuracy: 16.666666
-    heightInaccuracy: 10
-  m_NavMesh: {fileID: 0}
---- !u!1 &88242446
+    cellSize: 0.16666667
+    manualCellSize: 0
+  m_NavMeshData: {fileID: 0}
+--- !u!1 &37221212
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 88242450}
-  - 114: {fileID: 88242448}
-  - 114: {fileID: 88242449}
-  - 114: {fileID: 88242447}
+  - 4: {fileID: 37221216}
+  - 114: {fileID: 37221214}
+  - 114: {fileID: 37221215}
+  - 114: {fileID: 37221213}
   m_Layer: 0
-  m_Name: Message Node
+  m_Name: ButtonNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &88242447
+--- !u!114 &37221213
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 88242446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7ab9974477ea5049950454fdc186987, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_owner: {fileID: 88242448}
-  yOffset: 25
-  m_hitArea: {x: 10, y: 10}
-  Offset:
-    serializedVersion: 2
-    x: -5
-    y: 24
-    width: 10
-    height: 10
-  Position:
-    serializedVersion: 2
-    x: 758
-    y: 367
-    width: 10
-    height: 10
-  Name: Setter
-  Connections:
-  - Outlet: {fileID: 699085815}
-    Inlet: {fileID: 88242447}
-    Points: []
-  m_type: 1
-  HelpText: This is a let.
---- !u!114 &88242448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 88242446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5103a14a430e914180f813fb2387420, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_rect:
-    serializedVersion: 2
-    x: 763
-    y: 318
-    width: 300
-    height: 125
-  Id: 40
-  ShowCloseButton: 1
-  m_position: {x: 763, y: 318}
-  m_size: {x: 300, y: 125}
-  m_lets:
-  - {fileID: 88242449}
-  - {fileID: 88242447}
-  m_closeBoxPos:
-    serializedVersion: 2
-    x: 768
-    y: 293
-    width: 20
-    height: 20
-  input: {fileID: 88242449}
-  setter: {fileID: 88242447}
-  Message: Message
-  Target: {fileID: 0}
---- !u!114 &88242449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 88242446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7ab9974477ea5049950454fdc186987, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_owner: {fileID: 88242448}
-  yOffset: 0
-  m_hitArea: {x: 10, y: 10}
-  Offset:
-    serializedVersion: 2
-    x: -5
-    y: 24
-    width: 10
-    height: 10
-  Position:
-    serializedVersion: 2
-    x: 758
-    y: 342
-    width: 10
-    height: 10
-  Name: Input
-  Connections:
-  - Outlet: {fileID: 699085816}
-    Inlet: {fileID: 88242449}
-    Points: []
-  m_type: 1
-  HelpText: This is a let.
---- !u!4 &88242450
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 88242446}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 763963357}
-  m_RootOrder: 4
---- !u!1 &307723352
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 307723356}
-  - 114: {fileID: 307723355}
-  - 114: {fileID: 307723354}
-  - 114: {fileID: 307723353}
-  m_Layer: 0
-  m_Name: Graph Inlet
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &307723353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 307723352}
+  m_GameObject: {fileID: 37221212}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c97645ac51248c74c85d00583d79c5c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Visible: 1
-  m_owner: {fileID: 307723355}
+  m_owner: {fileID: 37221214}
   yOffset: 25
   m_hitArea: {x: 10, y: 10}
   Offset:
@@ -248,27 +126,63 @@ MonoBehaviour:
     height: 10
   Position:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
-  Name: Outlet
-  Connections: []
+    x: 680
+    y: 143
+    width: 10
+    height: 10
+  Name: Output
+  Connections:
+  - Outlet: {fileID: 37221213}
+    Inlet: {fileID: 169553108}
+    Points: []
   m_type: 2
   HelpText: This is a let.
---- !u!114 &307723354
+--- !u!114 &37221214
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 307723352}
+  m_GameObject: {fileID: 37221212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f55b7694553cea148a02aeed6f71a2a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Visible: 1
+  m_rect:
+    serializedVersion: 2
+    x: 585
+    y: 94
+    width: 100
+    height: 100
+  Id: 62
+  ShowCloseButton: 1
+  m_position: {x: 585, y: 94}
+  m_size: {x: 100, y: 100}
+  m_lets:
+  - {fileID: 37221215}
+  - {fileID: 37221213}
+  m_closeBoxPos:
+    serializedVersion: 2
+    x: 590
+    y: 69
+    width: 20
+    height: 20
+  inlet: {fileID: 37221215}
+  outlet: {fileID: 37221213}
+--- !u!114 &37221215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 37221212}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7ab9974477ea5049950454fdc186987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Visible: 0
-  m_owner: {fileID: 307723355}
+  Visible: 1
+  m_owner: {fileID: 37221214}
   yOffset: 0
   m_hitArea: {x: 10, y: 10}
   Offset:
@@ -279,201 +193,37 @@ MonoBehaviour:
     height: 10
   Position:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
-  Name: Inlet
+    x: 580
+    y: 118
+    width: 10
+    height: 10
+  Name: Input
   Connections: []
   m_type: 1
   HelpText: This is a let.
---- !u!114 &307723355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 307723352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e23616121704434ea646f48e27676e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 0
-  m_rect:
-    serializedVersion: 2
-    x: -312
-    y: 274
-    width: 100
-    height: 80
-  Id: 36
-  ShowCloseButton: 0
-  m_position: {x: -312, y: 274}
-  m_size: {x: 100, y: 80}
-  m_lets:
-  - {fileID: 307723354}
-  - {fileID: 307723353}
-  m_closeBoxPos:
-    serializedVersion: 2
-    x: 10
-    y: -20
-    width: 10
-    height: 20
-  m_inlet: {fileID: 307723354}
-  m_outlet: {fileID: 307723353}
---- !u!4 &307723356
+--- !u!4 &37221216
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 307723352}
+  m_GameObject: {fileID: 37221212}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 763963357}
-  m_RootOrder: 0
---- !u!1 &604547722
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 604547723}
-  - 114: {fileID: 604547726}
-  - 114: {fileID: 604547725}
-  - 114: {fileID: 604547724}
-  m_Layer: 0
-  m_Name: NodeGraph
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &604547723
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 604547722}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 869755819}
-  - {fileID: 1391119265}
-  m_Father: {fileID: 605728160}
+  m_Father: {fileID: 49367720}
   m_RootOrder: 2
---- !u!114 &604547724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 604547722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c97645ac51248c74c85d00583d79c5c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_owner: {fileID: 604547726}
-  yOffset: 25
-  m_hitArea: {x: 10, y: 10}
-  Offset:
-    serializedVersion: 2
-    x: 95
-    y: 24
-    width: 10
-    height: 10
-  Position:
-    serializedVersion: 2
-    x: 459
-    y: 225
-    width: 10
-    height: 10
-  Name: Output
-  Connections: []
-  m_type: 2
-  HelpText: This is a let.
---- !u!114 &604547725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 604547722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7ab9974477ea5049950454fdc186987, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_owner: {fileID: 604547726}
-  yOffset: 0
-  m_hitArea: {x: 10, y: 10}
-  Offset:
-    serializedVersion: 2
-    x: -5
-    y: 24
-    width: 10
-    height: 10
-  Position:
-    serializedVersion: 2
-    x: 359
-    y: 200
-    width: 10
-    height: 10
-  Name: Input
-  Connections: []
-  m_type: 1
-  HelpText: This is a let.
---- !u!114 &604547726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 604547722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4e11bb2684a1694eb4a599c1b54ab0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_rect:
-    serializedVersion: 2
-    x: 364
-    y: 176
-    width: 100
-    height: 100
-  Id: 17
-  ShowCloseButton: 1
-  m_position: {x: 364, y: 176}
-  m_size: {x: 100, y: 100}
-  m_lets:
-  - {fileID: 604547725}
-  - {fileID: 604547724}
-  m_closeBoxPos:
-    serializedVersion: 2
-    x: 369
-    y: 151
-    width: 20
-    height: 20
-  ConnectionColor: {r: 0, g: 1, b: 0, a: 1}
-  m_inlet: {fileID: 604547725}
-  m_outlet: {fileID: 604547724}
-  MasterInlet: {fileID: 869755820}
-  MasterOutlet: {fileID: 1391119266}
-  m_inited: 1
---- !u!1 &605728156
+--- !u!1 &49367716
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 605728160}
-  - 114: {fileID: 605728158}
-  - 114: {fileID: 605728159}
-  - 114: {fileID: 605728157}
+  - 4: {fileID: 49367720}
+  - 114: {fileID: 49367719}
+  - 114: {fileID: 49367718}
+  - 114: {fileID: 49367717}
   m_Layer: 0
   m_Name: NodeGraph
   m_TagString: Untagged
@@ -481,618 +231,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &605728157
+--- !u!114 &49367717
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 605728156}
+  m_GameObject: {fileID: 49367716}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c97645ac51248c74c85d00583d79c5c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Visible: 1
-  m_owner: {fileID: 605728158}
-  yOffset: 25
-  m_hitArea: {x: 10, y: 10}
-  Offset:
-    serializedVersion: 2
-    x: 95
-    y: 24
-    width: 10
-    height: 10
-  Position:
-    serializedVersion: 2
-    x: 259
-    y: 194
-    width: 10
-    height: 10
-  Name: Output
-  Connections:
-  - Outlet: {fileID: 605728157}
-    Inlet: {fileID: 699085818}
-    Points: []
-  m_type: 2
-  HelpText: This is a let.
---- !u!114 &605728158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 605728156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4e11bb2684a1694eb4a599c1b54ab0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_rect:
-    serializedVersion: 2
-    x: 164
-    y: 145
-    width: 100
-    height: 100
-  Id: 39
-  ShowCloseButton: 1
-  m_position: {x: 164, y: 145}
-  m_size: {x: 100, y: 100}
-  m_lets:
-  - {fileID: 605728159}
-  - {fileID: 605728157}
-  m_closeBoxPos:
-    serializedVersion: 2
-    x: 169
-    y: 120
-    width: 20
-    height: 20
-  ConnectionColor: {r: 0, g: 1, b: 0, a: 1}
-  m_inlet: {fileID: 605728159}
-  m_outlet: {fileID: 605728157}
-  MasterInlet: {fileID: 1414320560}
-  MasterOutlet: {fileID: 1120950306}
-  m_inited: 1
---- !u!114 &605728159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 605728156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7ab9974477ea5049950454fdc186987, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_owner: {fileID: 605728158}
-  yOffset: 0
-  m_hitArea: {x: 10, y: 10}
-  Offset:
-    serializedVersion: 2
-    x: -5
-    y: 24
-    width: 10
-    height: 10
-  Position:
-    serializedVersion: 2
-    x: 159
-    y: 169
-    width: 10
-    height: 10
-  Name: Input
-  Connections: []
-  m_type: 1
-  HelpText: This is a let.
---- !u!4 &605728160
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 605728156}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1414320563}
-  - {fileID: 1120950309}
-  - {fileID: 604547723}
-  m_Father: {fileID: 763963357}
-  m_RootOrder: 3
---- !u!1 &699085807
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 699085820}
-  - 114: {fileID: 699085819}
-  - 114: {fileID: 699085818}
-  - 114: {fileID: 699085817}
-  - 114: {fileID: 699085816}
-  - 114: {fileID: 699085815}
-  - 114: {fileID: 699085814}
-  - 114: {fileID: 699085813}
-  - 114: {fileID: 699085812}
-  - 114: {fileID: 699085811}
-  - 114: {fileID: 699085810}
-  - 114: {fileID: 699085809}
-  - 114: {fileID: 699085808}
-  m_Layer: 0
-  m_Name: Router Node
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &699085808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 699085807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c97645ac51248c74c85d00583d79c5c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_owner: {fileID: 699085819}
-  yOffset: 250
-  m_hitArea: {x: 10, y: 10}
-  Offset:
-    serializedVersion: 2
-    x: 95
-    y: 24
-    width: 10
-    height: 10
-  Position:
-    serializedVersion: 2
-    x: 456
-    y: 449
-    width: 10
-    height: 10
-  Name: Outlet 9
-  Connections: []
-  m_type: 2
-  HelpText: This is a let.
---- !u!114 &699085809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 699085807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c97645ac51248c74c85d00583d79c5c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_owner: {fileID: 699085819}
-  yOffset: 225
-  m_hitArea: {x: 10, y: 10}
-  Offset:
-    serializedVersion: 2
-    x: 95
-    y: 24
-    width: 10
-    height: 10
-  Position:
-    serializedVersion: 2
-    x: 456
-    y: 424
-    width: 10
-    height: 10
-  Name: Outlet 8
-  Connections: []
-  m_type: 2
-  HelpText: This is a let.
---- !u!114 &699085810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 699085807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c97645ac51248c74c85d00583d79c5c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_owner: {fileID: 699085819}
-  yOffset: 200
-  m_hitArea: {x: 10, y: 10}
-  Offset:
-    serializedVersion: 2
-    x: 95
-    y: 24
-    width: 10
-    height: 10
-  Position:
-    serializedVersion: 2
-    x: 456
-    y: 399
-    width: 10
-    height: 10
-  Name: Outlet 7
-  Connections: []
-  m_type: 2
-  HelpText: This is a let.
---- !u!114 &699085811
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 699085807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c97645ac51248c74c85d00583d79c5c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_owner: {fileID: 699085819}
-  yOffset: 175
-  m_hitArea: {x: 10, y: 10}
-  Offset:
-    serializedVersion: 2
-    x: 95
-    y: 24
-    width: 10
-    height: 10
-  Position:
-    serializedVersion: 2
-    x: 456
-    y: 374
-    width: 10
-    height: 10
-  Name: Outlet 6
-  Connections: []
-  m_type: 2
-  HelpText: This is a let.
---- !u!114 &699085812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 699085807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c97645ac51248c74c85d00583d79c5c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_owner: {fileID: 699085819}
-  yOffset: 150
-  m_hitArea: {x: 10, y: 10}
-  Offset:
-    serializedVersion: 2
-    x: 95
-    y: 24
-    width: 10
-    height: 10
-  Position:
-    serializedVersion: 2
-    x: 456
-    y: 349
-    width: 10
-    height: 10
-  Name: Outlet 5
-  Connections: []
-  m_type: 2
-  HelpText: This is a let.
---- !u!114 &699085813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 699085807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c97645ac51248c74c85d00583d79c5c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_owner: {fileID: 699085819}
-  yOffset: 125
-  m_hitArea: {x: 10, y: 10}
-  Offset:
-    serializedVersion: 2
-    x: 95
-    y: 24
-    width: 10
-    height: 10
-  Position:
-    serializedVersion: 2
-    x: 456
-    y: 324
-    width: 10
-    height: 10
-  Name: Outlet 4
-  Connections: []
-  m_type: 2
-  HelpText: This is a let.
---- !u!114 &699085814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 699085807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c97645ac51248c74c85d00583d79c5c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_owner: {fileID: 699085819}
-  yOffset: 100
-  m_hitArea: {x: 10, y: 10}
-  Offset:
-    serializedVersion: 2
-    x: 95
-    y: 24
-    width: 10
-    height: 10
-  Position:
-    serializedVersion: 2
-    x: 456
-    y: 299
-    width: 10
-    height: 10
-  Name: Outlet 3
-  Connections: []
-  m_type: 2
-  HelpText: This is a let.
---- !u!114 &699085815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 699085807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c97645ac51248c74c85d00583d79c5c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_owner: {fileID: 699085819}
-  yOffset: 75
-  m_hitArea: {x: 10, y: 10}
-  Offset:
-    serializedVersion: 2
-    x: 95
-    y: 24
-    width: 10
-    height: 10
-  Position:
-    serializedVersion: 2
-    x: 456
-    y: 274
-    width: 10
-    height: 10
-  Name: Outlet 2
-  Connections:
-  - Outlet: {fileID: 699085815}
-    Inlet: {fileID: 88242447}
-    Points: []
-  m_type: 2
-  HelpText: This is a let.
---- !u!114 &699085816
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 699085807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c97645ac51248c74c85d00583d79c5c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_owner: {fileID: 699085819}
-  yOffset: 50
-  m_hitArea: {x: 10, y: 10}
-  Offset:
-    serializedVersion: 2
-    x: 95
-    y: 24
-    width: 10
-    height: 10
-  Position:
-    serializedVersion: 2
-    x: 456
-    y: 249
-    width: 10
-    height: 10
-  Name: Outlet 1
-  Connections:
-  - Outlet: {fileID: 699085816}
-    Inlet: {fileID: 88242449}
-    Points: []
-  m_type: 2
-  HelpText: This is a let.
---- !u!114 &699085817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 699085807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c97645ac51248c74c85d00583d79c5c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_owner: {fileID: 699085819}
-  yOffset: 25
-  m_hitArea: {x: 10, y: 10}
-  Offset:
-    serializedVersion: 2
-    x: 95
-    y: 24
-    width: 10
-    height: 10
-  Position:
-    serializedVersion: 2
-    x: 456
-    y: 224
-    width: 10
-    height: 10
-  Name: Outlet 0
-  Connections:
-  - Outlet: {fileID: 699085817}
-    Inlet: {fileID: 1736144587}
-    Points: []
-  m_type: 2
-  HelpText: This is a let.
---- !u!114 &699085818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 699085807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7ab9974477ea5049950454fdc186987, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_owner: {fileID: 699085819}
-  yOffset: 0
-  m_hitArea: {x: 10, y: 10}
-  Offset:
-    serializedVersion: 2
-    x: -5
-    y: 24
-    width: 10
-    height: 10
-  Position:
-    serializedVersion: 2
-    x: 356
-    y: 199
-    width: 10
-    height: 10
-  Name: Inlet
-  Connections:
-  - Outlet: {fileID: 605728157}
-    Inlet: {fileID: 699085818}
-    Points: []
-  m_type: 1
-  HelpText: This is a let.
---- !u!114 &699085819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 699085807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f017f1177a56dc4498ac7680619c073, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_rect:
-    serializedVersion: 2
-    x: 361
-    y: 175
-    width: 100
-    height: 330
-  Id: 41
-  ShowCloseButton: 1
-  m_position: {x: 361, y: 175}
-  m_size: {x: 100, y: 330}
-  m_lets:
-  - {fileID: 699085818}
-  - {fileID: 699085817}
-  - {fileID: 699085816}
-  - {fileID: 699085815}
-  - {fileID: 699085814}
-  - {fileID: 699085813}
-  - {fileID: 699085812}
-  - {fileID: 699085811}
-  - {fileID: 699085810}
-  - {fileID: 699085809}
-  - {fileID: 699085808}
-  m_closeBoxPos:
-    serializedVersion: 2
-    x: 366
-    y: 150
-    width: 20
-    height: 20
-  m_inlet: {fileID: 699085818}
-  m_outlets:
-  - {fileID: 699085817}
-  - {fileID: 699085816}
-  - {fileID: 699085815}
-  - {fileID: 699085814}
-  - {fileID: 699085813}
-  - {fileID: 699085812}
-  - {fileID: 699085811}
-  - {fileID: 699085810}
-  - {fileID: 699085809}
-  - {fileID: 699085808}
-  Outlets: 10
-  y: 275
---- !u!4 &699085820
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 699085807}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 763963357}
-  m_RootOrder: 5
---- !u!1 &763963356
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 763963357}
-  - 114: {fileID: 763963360}
-  - 114: {fileID: 763963359}
-  - 114: {fileID: 763963358}
-  m_Layer: 0
-  m_Name: NodeGraph
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &763963357
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 763963356}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 307723356}
-  - {fileID: 1133721383}
-  - {fileID: 1736144585}
-  - {fileID: 605728160}
-  - {fileID: 88242450}
-  - {fileID: 699085820}
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
---- !u!114 &763963358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 763963356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c97645ac51248c74c85d00583d79c5c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_owner: {fileID: 763963360}
+  m_owner: {fileID: 49367719}
   yOffset: 25
   m_hitArea: {x: 10, y: 10}
   Offset:
@@ -1111,19 +262,19 @@ MonoBehaviour:
   Connections: []
   m_type: 2
   HelpText: This is a let.
---- !u!114 &763963359
+--- !u!114 &49367718
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 763963356}
+  m_GameObject: {fileID: 49367716}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7ab9974477ea5049950454fdc186987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Visible: 1
-  m_owner: {fileID: 763963360}
+  m_owner: {fileID: 49367719}
   yOffset: 0
   m_hitArea: {x: 10, y: 10}
   Offset:
@@ -1142,12 +293,12 @@ MonoBehaviour:
   Connections: []
   m_type: 1
   HelpText: This is a let.
---- !u!114 &763963360
+--- !u!114 &49367719
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 763963356}
+  m_GameObject: {fileID: 49367716}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4e11bb2684a1694eb4a599c1b54ab0b, type: 3}
@@ -1165,8 +316,8 @@ MonoBehaviour:
   m_position: {x: 10, y: 10}
   m_size: {x: 100, y: 100}
   m_lets:
-  - {fileID: 763963359}
-  - {fileID: 763963358}
+  - {fileID: 49367718}
+  - {fileID: 49367717}
   m_closeBoxPos:
     serializedVersion: 2
     x: 10
@@ -1174,118 +325,101 @@ MonoBehaviour:
     width: 10
     height: 20
   ConnectionColor: {r: 0, g: 1, b: 0, a: 1}
-  m_inlet: {fileID: 763963359}
-  m_outlet: {fileID: 763963358}
-  MasterInlet: {fileID: 307723355}
-  MasterOutlet: {fileID: 1133721386}
+  m_inlet: {fileID: 49367718}
+  m_outlet: {fileID: 49367717}
+  MasterInlet: {fileID: 1622045145}
+  MasterOutlet: {fileID: 297587783}
   m_inited: 1
---- !u!1 &869755818
+--- !u!4 &49367720
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 49367716}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1622045148}
+  - {fileID: 297587786}
+  - {fileID: 37221216}
+  - {fileID: 169553106}
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+--- !u!1 &169553105
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 869755819}
-  - 114: {fileID: 869755820}
-  - 114: {fileID: 869755822}
-  - 114: {fileID: 869755821}
+  - 4: {fileID: 169553106}
+  - 114: {fileID: 169553109}
+  - 114: {fileID: 169553108}
+  - 114: {fileID: 169553107}
   m_Layer: 0
-  m_Name: Graph Inlet
+  m_Name: PrintNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &869755819
+--- !u!4 &169553106
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 869755818}
+  m_GameObject: {fileID: 169553105}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 604547723}
-  m_RootOrder: 0
---- !u!114 &869755820
+  m_Father: {fileID: 49367720}
+  m_RootOrder: 3
+--- !u!114 &169553107
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 869755818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e23616121704434ea646f48e27676e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_rect:
-    serializedVersion: 2
-    x: 10
-    y: 100
-    width: 100
-    height: 80
-  Id: 24
-  ShowCloseButton: 0
-  m_position: {x: 10, y: 100}
-  m_size: {x: 100, y: 80}
-  m_lets:
-  - {fileID: 869755822}
-  - {fileID: 869755821}
-  m_closeBoxPos:
-    serializedVersion: 2
-    x: 15
-    y: 75
-    width: 20
-    height: 20
-  m_inlet: {fileID: 869755822}
-  m_outlet: {fileID: 869755821}
---- !u!114 &869755821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 869755818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c97645ac51248c74c85d00583d79c5c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_owner: {fileID: 869755820}
-  yOffset: 25
-  m_hitArea: {x: 10, y: 10}
-  Offset:
-    serializedVersion: 2
-    x: 95
-    y: 24
-    width: 10
-    height: 10
-  Position:
-    serializedVersion: 2
-    x: 105
-    y: 149
-    width: 10
-    height: 10
-  Name: Outlet
-  Connections: []
-  m_type: 2
-  HelpText: This is a let.
---- !u!114 &869755822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 869755818}
+  m_GameObject: {fileID: 169553105}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7ab9974477ea5049950454fdc186987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Visible: 0
-  m_owner: {fileID: 869755820}
+  Visible: 1
+  m_owner: {fileID: 169553109}
+  yOffset: 25
+  m_hitArea: {x: 10, y: 10}
+  Offset:
+    serializedVersion: 2
+    x: -5
+    y: 24
+    width: 10
+    height: 10
+  Position:
+    serializedVersion: 2
+    x: 862
+    y: 147
+    width: 10
+    height: 10
+  Name: Setter
+  Connections: []
+  m_type: 1
+  HelpText: This is a let.
+--- !u!114 &169553108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 169553105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7ab9974477ea5049950454fdc186987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Visible: 1
+  m_owner: {fileID: 169553109}
   yOffset: 0
   m_hitArea: {x: 10, y: 10}
   Offset:
@@ -1296,64 +430,63 @@ MonoBehaviour:
     height: 10
   Position:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
-  Name: Inlet
-  Connections: []
+    x: 862
+    y: 122
+    width: 10
+    height: 10
+  Name: Input
+  Connections:
+  - Outlet: {fileID: 37221213}
+    Inlet: {fileID: 169553108}
+    Points: []
   m_type: 1
   HelpText: This is a let.
---- !u!1 &982301636
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 982301638}
-  - 114: {fileID: 982301637}
-  m_Layer: 0
-  m_Name: MessageReceiver
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &982301637
+--- !u!114 &169553109
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 982301636}
+  m_GameObject: {fileID: 169553105}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f931df0329486e847a4fd82369d8cadb, type: 3}
+  m_Script: {fileID: 11500000, guid: 6792b0002524653409186f555854f4e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &982301638
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 982301636}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
---- !u!1 &1120950305
+  Visible: 1
+  m_rect:
+    serializedVersion: 2
+    x: 867
+    y: 98
+    width: 200
+    height: 100
+  Id: 63
+  ShowCloseButton: 1
+  m_position: {x: 867, y: 98}
+  m_size: {x: 200, y: 100}
+  m_lets:
+  - {fileID: 169553108}
+  - {fileID: 169553107}
+  m_closeBoxPos:
+    serializedVersion: 2
+    x: 872
+    y: 73
+    width: 20
+    height: 20
+  trigger: {fileID: 0}
+  m_input: {fileID: 169553108}
+  m_setter: {fileID: 169553107}
+  Value: Hello World!
+--- !u!1 &297587782
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 1120950309}
-  - 114: {fileID: 1120950306}
-  - 114: {fileID: 1120950308}
-  - 114: {fileID: 1120950307}
+  - 4: {fileID: 297587786}
+  - 114: {fileID: 297587783}
+  - 114: {fileID: 297587785}
+  - 114: {fileID: 297587784}
   m_Layer: 0
   m_Name: Graph Outlet
   m_TagString: Untagged
@@ -1361,314 +494,52 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1120950306
+--- !u!114 &297587783
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1120950305}
+  m_GameObject: {fileID: 297587782}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e23616121704434ea646f48e27676e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Visible: 1
+  Visible: 0
   m_rect:
     serializedVersion: 2
     x: 500
     y: 500
     width: 100
     height: 80
-  Id: 16
+  Id: 61
   ShowCloseButton: 0
   m_position: {x: 500, y: 500}
   m_size: {x: 100, y: 80}
   m_lets:
-  - {fileID: 1120950308}
-  - {fileID: 1120950307}
-  m_closeBoxPos:
-    serializedVersion: 2
-    x: 505
-    y: 475
-    width: 20
-    height: 20
-  m_inlet: {fileID: 1120950308}
-  m_outlet: {fileID: 1120950307}
---- !u!114 &1120950307
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1120950305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c97645ac51248c74c85d00583d79c5c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 0
-  m_owner: {fileID: 1120950306}
-  yOffset: 25
-  m_hitArea: {x: 10, y: 10}
-  Offset:
-    serializedVersion: 2
-    x: 95
-    y: 24
-    width: 10
-    height: 10
-  Position:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
-  Name: Outlet
-  Connections: []
-  m_type: 2
-  HelpText: This is a let.
---- !u!114 &1120950308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1120950305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7ab9974477ea5049950454fdc186987, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_owner: {fileID: 1120950306}
-  yOffset: 0
-  m_hitArea: {x: 10, y: 10}
-  Offset:
-    serializedVersion: 2
-    x: -5
-    y: 24
-    width: 10
-    height: 10
-  Position:
-    serializedVersion: 2
-    x: 495
-    y: 524
-    width: 10
-    height: 10
-  Name: Inlet
-  Connections: []
-  m_type: 1
-  HelpText: This is a let.
---- !u!4 &1120950309
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1120950305}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 605728160}
-  m_RootOrder: 1
---- !u!1 &1133721382
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1133721383}
-  - 114: {fileID: 1133721386}
-  - 114: {fileID: 1133721385}
-  - 114: {fileID: 1133721384}
-  m_Layer: 0
-  m_Name: Graph Outlet
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1133721383
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1133721382}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 763963357}
-  m_RootOrder: 1
---- !u!114 &1133721384
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1133721382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c97645ac51248c74c85d00583d79c5c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 0
-  m_owner: {fileID: 1133721386}
-  yOffset: 25
-  m_hitArea: {x: 10, y: 10}
-  Offset:
-    serializedVersion: 2
-    x: 95
-    y: 24
-    width: 10
-    height: 10
-  Position:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
-  Name: Outlet
-  Connections: []
-  m_type: 2
-  HelpText: This is a let.
---- !u!114 &1133721385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1133721382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7ab9974477ea5049950454fdc186987, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_owner: {fileID: 1133721386}
-  yOffset: 0
-  m_hitArea: {x: 10, y: 10}
-  Offset:
-    serializedVersion: 2
-    x: -5
-    y: 24
-    width: 10
-    height: 10
-  Position:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
-  Name: Inlet
-  Connections: []
-  m_type: 1
-  HelpText: This is a let.
---- !u!114 &1133721386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1133721382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e23616121704434ea646f48e27676e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 0
-  m_rect:
-    serializedVersion: 2
-    x: 178
-    y: 674
-    width: 100
-    height: 80
-  Id: 37
-  ShowCloseButton: 0
-  m_position: {x: 178, y: 674}
-  m_size: {x: 100, y: 80}
-  m_lets:
-  - {fileID: 1133721385}
-  - {fileID: 1133721384}
+  - {fileID: 297587785}
+  - {fileID: 297587784}
   m_closeBoxPos:
     serializedVersion: 2
     x: 10
     y: -20
     width: 10
     height: 20
-  m_inlet: {fileID: 1133721385}
-  m_outlet: {fileID: 1133721384}
---- !u!1 &1391119264
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1391119265}
-  - 114: {fileID: 1391119266}
-  - 114: {fileID: 1391119268}
-  - 114: {fileID: 1391119267}
-  m_Layer: 0
-  m_Name: Graph Outlet
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1391119265
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1391119264}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 604547723}
-  m_RootOrder: 1
---- !u!114 &1391119266
+  m_inlet: {fileID: 297587785}
+  m_outlet: {fileID: 297587784}
+--- !u!114 &297587784
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1391119264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e23616121704434ea646f48e27676e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_rect:
-    serializedVersion: 2
-    x: 500
-    y: 500
-    width: 100
-    height: 80
-  Id: 25
-  ShowCloseButton: 0
-  m_position: {x: 500, y: 500}
-  m_size: {x: 100, y: 80}
-  m_lets:
-  - {fileID: 1391119268}
-  - {fileID: 1391119267}
-  m_closeBoxPos:
-    serializedVersion: 2
-    x: 505
-    y: 475
-    width: 20
-    height: 20
-  m_inlet: {fileID: 1391119268}
-  m_outlet: {fileID: 1391119267}
---- !u!114 &1391119267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1391119264}
+  m_GameObject: {fileID: 297587782}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c97645ac51248c74c85d00583d79c5c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Visible: 0
-  m_owner: {fileID: 1391119266}
+  m_owner: {fileID: 297587783}
   yOffset: 25
   m_hitArea: {x: 10, y: 10}
   Offset:
@@ -1687,19 +558,19 @@ MonoBehaviour:
   Connections: []
   m_type: 2
   HelpText: This is a let.
---- !u!114 &1391119268
+--- !u!114 &297587785
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1391119264}
+  m_GameObject: {fileID: 297587782}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7ab9974477ea5049950454fdc186987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Visible: 1
-  m_owner: {fileID: 1391119266}
+  m_owner: {fileID: 297587783}
   yOffset: 0
   m_hitArea: {x: 10, y: 10}
   Offset:
@@ -1710,25 +581,37 @@ MonoBehaviour:
     height: 10
   Position:
     serializedVersion: 2
-    x: 495
-    y: 524
-    width: 10
-    height: 10
+    x: 0
+    y: 0
+    width: 0
+    height: 0
   Name: Inlet
   Connections: []
   m_type: 1
   HelpText: This is a let.
---- !u!1 &1414320559
+--- !u!4 &297587786
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 297587782}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 49367720}
+  m_RootOrder: 1
+--- !u!1 &1622045144
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 1414320563}
-  - 114: {fileID: 1414320560}
-  - 114: {fileID: 1414320562}
-  - 114: {fileID: 1414320561}
+  - 4: {fileID: 1622045148}
+  - 114: {fileID: 1622045145}
+  - 114: {fileID: 1622045147}
+  - 114: {fileID: 1622045146}
   m_Layer: 0
   m_Name: Graph Inlet
   m_TagString: Untagged
@@ -1736,52 +619,52 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1414320560
+--- !u!114 &1622045145
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1414320559}
+  m_GameObject: {fileID: 1622045144}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e23616121704434ea646f48e27676e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Visible: 1
+  Visible: 0
   m_rect:
     serializedVersion: 2
     x: 10
     y: 100
     width: 100
     height: 80
-  Id: 15
+  Id: 60
   ShowCloseButton: 0
   m_position: {x: 10, y: 100}
   m_size: {x: 100, y: 80}
   m_lets:
-  - {fileID: 1414320562}
-  - {fileID: 1414320561}
+  - {fileID: 1622045147}
+  - {fileID: 1622045146}
   m_closeBoxPos:
     serializedVersion: 2
-    x: 15
-    y: 75
-    width: 20
+    x: 10
+    y: -20
+    width: 10
     height: 20
-  m_inlet: {fileID: 1414320562}
-  m_outlet: {fileID: 1414320561}
---- !u!114 &1414320561
+  m_inlet: {fileID: 1622045147}
+  m_outlet: {fileID: 1622045146}
+--- !u!114 &1622045146
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1414320559}
+  m_GameObject: {fileID: 1622045144}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c97645ac51248c74c85d00583d79c5c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Visible: 1
-  m_owner: {fileID: 1414320560}
+  m_owner: {fileID: 1622045145}
   yOffset: 25
   m_hitArea: {x: 10, y: 10}
   Offset:
@@ -1792,27 +675,27 @@ MonoBehaviour:
     height: 10
   Position:
     serializedVersion: 2
-    x: 105
-    y: 149
-    width: 10
-    height: 10
+    x: 0
+    y: 0
+    width: 0
+    height: 0
   Name: Outlet
   Connections: []
   m_type: 2
   HelpText: This is a let.
---- !u!114 &1414320562
+--- !u!114 &1622045147
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1414320559}
+  m_GameObject: {fileID: 1622045144}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7ab9974477ea5049950454fdc186987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Visible: 0
-  m_owner: {fileID: 1414320560}
+  m_owner: {fileID: 1622045145}
   yOffset: 0
   m_hitArea: {x: 10, y: 10}
   Offset:
@@ -1831,146 +714,162 @@ MonoBehaviour:
   Connections: []
   m_type: 1
   HelpText: This is a let.
---- !u!4 &1414320563
+--- !u!4 &1622045148
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1414320559}
+  m_GameObject: {fileID: 1622045144}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 605728160}
+  m_Father: {fileID: 49367720}
   m_RootOrder: 0
---- !u!1 &1736144584
+--- !u!1 &1718453866
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 1736144585}
-  - 114: {fileID: 1736144588}
-  - 114: {fileID: 1736144587}
-  - 114: {fileID: 1736144586}
+  - 4: {fileID: 1718453871}
+  - 20: {fileID: 1718453870}
+  - 92: {fileID: 1718453869}
+  - 124: {fileID: 1718453868}
+  - 81: {fileID: 1718453867}
   m_Layer: 0
-  m_Name: ButtonNode
+  m_Name: Main Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!81 &1718453867
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1718453866}
+  m_Enabled: 1
+--- !u!124 &1718453868
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1718453866}
+  m_Enabled: 1
+--- !u!92 &1718453869
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1718453866}
+  m_Enabled: 1
+--- !u!20 &1718453870
+Camera:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1718453866}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0.019607844}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+  m_StereoMirrorMode: 0
+--- !u!4 &1718453871
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1718453866}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!1 &1977485752
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1977485754}
+  - 108: {fileID: 1977485753}
+  m_Layer: 0
+  m_Name: Directional Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1736144585
+--- !u!108 &1977485753
+Light:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1977485752}
+  m_Enabled: 1
+  serializedVersion: 6
+  m_Type: 1
+  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 2
+    m_Resolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 4
+  m_BounceIntensity: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+  m_AreaSize: {x: 1, y: 1}
+--- !u!4 &1977485754
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1736144584}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 1977485752}
+  m_LocalRotation: {x: 0.40821794, y: -0.23456973, z: 0.109381676, w: 0.87542605}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 763963357}
-  m_RootOrder: 2
---- !u!114 &1736144586
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1736144584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c97645ac51248c74c85d00583d79c5c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_owner: {fileID: 1736144588}
-  yOffset: 25
-  m_hitArea: {x: 10, y: 10}
-  Offset:
-    serializedVersion: 2
-    x: 95
-    y: 24
-    width: 10
-    height: 10
-  Position:
-    serializedVersion: 2
-    x: 794
-    y: 187
-    width: 10
-    height: 10
-  Name: Output
-  Connections: []
-  m_type: 2
-  HelpText: This is a let.
---- !u!114 &1736144587
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1736144584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7ab9974477ea5049950454fdc186987, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_owner: {fileID: 1736144588}
-  yOffset: 0
-  m_hitArea: {x: 10, y: 10}
-  Offset:
-    serializedVersion: 2
-    x: -5
-    y: 24
-    width: 10
-    height: 10
-  Position:
-    serializedVersion: 2
-    x: 694
-    y: 162
-    width: 10
-    height: 10
-  Name: Input
-  Connections:
-  - Outlet: {fileID: 0}
-    Inlet: {fileID: 1736144587}
-    Points: []
-  - Outlet: {fileID: 699085817}
-    Inlet: {fileID: 1736144587}
-    Points: []
-  m_type: 1
-  HelpText: This is a let.
---- !u!114 &1736144588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1736144584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f55b7694553cea148a02aeed6f71a2a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Visible: 1
-  m_rect:
-    serializedVersion: 2
-    x: 699
-    y: 138
-    width: 100
-    height: 100
-  Id: 38
-  ShowCloseButton: 1
-  m_position: {x: 699, y: 138}
-  m_size: {x: 100, y: 100}
-  m_lets:
-  - {fileID: 1736144587}
-  - {fileID: 1736144586}
-  m_closeBoxPos:
-    serializedVersion: 2
-    x: 704
-    y: 113
-    width: 20
-    height: 20
-  inlet: {fileID: 1736144587}
-  outlet: {fileID: 1736144586}
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
