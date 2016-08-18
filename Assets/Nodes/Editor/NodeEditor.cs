@@ -271,6 +271,20 @@ namespace SimpleNodeEditor
                 }
             }
 
+            var nodesToRemove = new List<int>();
+            for (int i = 0; i < m_nodes.Count; i++)
+            {
+                if( m_nodes[i] == null )
+                {
+                    nodesToRemove.Add(i);
+                }
+            }
+
+            for(int i = 0; i< nodesToRemove.Count; i++)
+            {
+                m_nodes.RemoveAt(nodesToRemove[i]-i);
+            }
+
             BeginWindows();
 
             for (int i = 0; i < m_nodes.Count; i++)
